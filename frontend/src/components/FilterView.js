@@ -13,13 +13,14 @@ class FilterView extends Component {
   }
 
   onChange = value => {
+    value = value.toLowerCase();
     //if(value.length < 2) return;
     const { courses } = this.props;
     const filteredCourses = courses.filter(course => {
       let regexp = RegExp(value);
-      return  course.name.match(regexp) ||
-              course.code.match(regexp) ||
-              course.examinator.match(regexp);
+      return  course.name.toLowerCase().match(regexp)       ||
+              course.code.toLowerCase().match(regexp)       ||
+              course.examinator.toLowerCase().match(regexp);
     });
     this.setState({
       filteredCourses,

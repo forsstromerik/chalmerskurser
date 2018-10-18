@@ -12,6 +12,8 @@ module.exports = courseParser = arr => {
         axios.get(arr[index++].url)
         .then(async res => {
           let parsed = await parseHTML(res.data, arr[index - 1]);
+
+          /* TODO: More failsafe: Save post immediately instead */
           list.push(parsed);
         })
         .catch(() => {
