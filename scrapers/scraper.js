@@ -6,9 +6,6 @@ const courseParser = require('./courseParser');
 
 const FETCH_URL = `${process.env.BASE_FETCH_URL}&batch_size=${process.env.BATCH_SIZE}&sortorder=${process.env.SORT_ORDER}&search_ac_year=${process.env.SEARCH_YEAR}&parsergrp=0`
 
-/* TODO: As of now, there is no check for already existing courses,
-** which means that we are storing duplicates */
-
 axios.get(FETCH_URL).then(res => {
   //let str = JSON.stringify(res.data);
   let buffer = Buffer.from(res.data);

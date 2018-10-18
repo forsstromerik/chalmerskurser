@@ -4,66 +4,86 @@ const mongoose = require('mongoose');
 
 const Course = require('./course');
 
+/* TODO: As of now, there is no check for already existing courses,
+** which means that we are storing duplicates */
+
 /* Post new course to db */
 router.post('/course', (req, res) => {
+  Course.findOne({ code: req.body.code }, (err, c) => {
 
-  const course = new Course({
-    _id: new mongoose.Types.ObjectId(),
-    code: req.body.code,
-    name: req.body.name,
-    url: req.body.url,
-    credits: req.body.credits,
-    institution: req.body.institution,
-    homepage: req.body.homepage,
-    sp: req.body.sp,
-    examinator: req.body.examinator,
-    examinatorURL: req.body.examinatorURL,
-    syllabus: req.body.syllabus
-  });
+    /* Don't store duplicates */
+    if (c) { 
+      console.log(`Error. Course already exists: ${c}`);
+      return;
+    }; 
 
-  course
-    .save()
-    .then(_res => {
-      console.log(_res);
-      res.status(201).json({
-        message: 'Handling POST request to /courses/course',
-        createdCourse: course
-      });
-    })
-    .catch(err => {
-      console.error(err); 
-      res.status(500).json({ error: err });
-    })
+    const course = new Course({
+      _id: new mongoose.Types.ObjectId(),
+      code: req.body.code,
+      name: req.body.name,
+      url: req.body.url,
+      credits: req.body.credits,
+      institution: req.body.institution,
+      homepage: req.body.homepage,
+      sp: req.body.sp,
+      examinator: req.body.examinator,
+      examinatorURL: req.body.examinatorURL,
+      syllabus: req.body.syllabus
+    });
+
+    course
+      .save()
+      .then(_res => {
+        console.log(_res);
+        res.status(201).json({
+          message: 'Handling POST request to /courses/course',
+          createdCourse: course
+        });
+      })
+      .catch(err => {
+        console.error(err); 
+        res.status(500).json({ error: err });
+      })
+  })  
 })
 
 /* Post array of courses to db */
 router.post('/', (req, res) => {
   Promise.all(req.body.res.map(obj => {
-    const course = new Course({
-      _id: new mongoose.Types.ObjectId(),
-      code: obj.code,
-      name: obj.name,
-      url: obj.url,
-      credits: obj.credits,
-      institution: obj.institution,
-      homepage: obj.homepage,
-      sp: obj.sp,
-      examinator: obj.examinator,
-      examinatorURL: obj.examinatorURL,
-      syllabus: obj.syllabus
-    });
-    course.save()
-    .then(_res => {
-      console.log("Saved");
-    })
-    .catch(err => {
-      console.log(err);
+    Course.findOne({ code: obj.code }, (err, c) => {
+      console.log(obj.code);
+      /* Don't store duplicates */
+      if (c) { 
+        console.log(`Error. Course already exists: ${c.code} - ${c.name}`);
+        return;
+      }; 
+
+      const course = new Course({
+        _id: new mongoose.Types.ObjectId(),
+        code: obj.code,
+        name: obj.name,
+        url: obj.url,
+        credits: obj.credits,
+        institution: obj.institution,
+        homepage: obj.homepage,
+        sp: obj.sp,
+        examinator: obj.examinator,
+        examinatorURL: obj.examinatorURL,
+        syllabus: obj.syllabus
+      });
+      course.save()
+      .then(_res => {
+        console.log("Saved");
+      })
+      .catch(err => {
+        console.log(err);
+      })
     })
   })).then(() => {
     res.status(201).json({ message: 'Courses created' });
   }).catch(_err => { 
     res.status(500).json({ error: _err });
-   })
+  })
 })
 
 /* Get all courses */

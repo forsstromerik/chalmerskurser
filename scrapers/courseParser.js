@@ -8,6 +8,7 @@ module.exports = courseParser = arr => {
     let list = [];
     let timer = setInterval(() => {
       if (index < arr.length) {
+        console.log(`Querying item ${index + 1} of ${arr.length}: ${arr[index].code} - ${arr[index].name}`);
         axios.get(arr[index++].url)
         .then(async res => {
           let parsed = await parseHTML(res.data, arr[index - 1]);
@@ -21,7 +22,7 @@ module.exports = courseParser = arr => {
         clearInterval(timer);
         resolve(list);
       }
-    }, 1000);
+    }, (Math.random()*7000 + 1000));
   })
 }
 
@@ -58,17 +59,17 @@ parseWithRegex = (arr, course) => {
     }
     if(startCount) {
       let ans = RegExp(/\s+?<td>/).exec(arr[i]);
-      let lp = RegExp(/\s+\d+,?\d+?hp/).exec(arr[i]);
+      let sp = RegExp(/\s+\d+,?\d+?hp/).exec(arr[i]);
       if(ans) {
         counter++;
-      } else if (lp) {
+      } else if (sp) {
         startCount = false;
         if(counter < 5) {
-          updatedCourse.lp = `LP${counter}`;
+          updatedCourse.sp = `LP${counter}`;
         } else if ( counter === 5) {
-          updatedCourse.lp = 'Sommarkurs';
+          updatedCourse.sp = 'Sommarkurs';
         } else {
-          updatedCourse.lp = 'Ej LP';
+          updatedCourse.sp = 'Ej LP';
         }
       }
     }
