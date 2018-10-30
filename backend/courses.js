@@ -6,59 +6,58 @@ const Course = require('./course');
 
 /* Post new course to db */
 router.post('/course', (req, res) => {
-  Course.create
-    const course = new Course({
-      _id: new mongoose.Types.ObjectId(),
-      code: req.body.code,
-      name: req.body.name,
-      url: req.body.url,
-      credits: req.body.credits,
-      institution: req.body.institution,
-      homepage: req.body.homepage,
-      sp: req.body.sp,
-      examinator: req.body.examinator,
-      examinatorURL: req.body.examinatorURL,
-      syllabus: req.body.syllabus
-    })
+  const course = new Course({
+    _id: new mongoose.Types.ObjectId(),
+    code: req.body.code,
+    name: req.body.name,
+    url: req.body.url,
+    credits: req.body.credits,
+    institution: req.body.institution,
+    homepage: req.body.homepage,
+    sp: req.body.sp,
+    examinator: req.body.examinator,
+    examinatorURL: req.body.examinatorURL,
+    syllabus: req.body.syllabus
+  })
 
-    course.save()
-      .then(_res => {
-        console.log(_res);
-        res.status(201).json({
-          message: 'Handling POST request to /courses/course',
-          createdCourse: course
-        });
-      })
-      .catch(err => {
-        console.error(err);
-        res.status(500).json({ error: err });
-      })
+  course.save()
+    .then(_res => {
+      console.log(_res);
+      res.status(201).json({
+        message: 'Handling POST request to /courses/course',
+        createdCourse: course
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: err });
+    })
 })
 
 /* Post array of courses to db */
 router.post('/', (req, res) => {
   Promise.all(req.body.res.map(obj => {
-      const course = new Course({
-        _id: new mongoose.Types.ObjectId(),
-        code: obj.code,
-        name: obj.name,
-        url: obj.url,
-        credits: obj.credits,
-        institution: obj.institution,
-        homepage: obj.homepage,
-        sp: obj.sp,
-        examinator: obj.examinator,
-        examinatorURL: obj.examinatorURL,
-        syllabus: obj.syllabus
-      })
+    const course = new Course({
+      _id: new mongoose.Types.ObjectId(),
+      code: obj.code,
+      name: obj.name,
+      url: obj.url,
+      credits: obj.credits,
+      institution: obj.institution,
+      homepage: obj.homepage,
+      sp: obj.sp,
+      examinator: obj.examinator,
+      examinatorURL: obj.examinatorURL,
+      syllabus: obj.syllabus
+    })
 
-      course.save()
-        .then(_res => {
-          console.log("Saved");
-        })
-        .catch(err => {
-          console.log(err);
-        })
+    course.save()
+      .then(_res => {
+        console.log("Saved");
+      })
+      .catch(err => {
+        console.log(err);
+      })
   })).then(() => {
     res.status(201).json({ message: 'Courses created' });
   }).catch(_err => {
@@ -87,7 +86,7 @@ router.get('/:courseID', (req, res) => {
     .exec()
     .then(doc => {
       console.log(doc);
-      if(doc) {
+      if (doc) {
         res.status(200).json(doc);
       } else {
         res.status(404).json({ message: 'No course found' });
@@ -103,7 +102,7 @@ router.get('/:courseID', (req, res) => {
 router.patch('/:courseID', (req, res) => {
   const id = req.params.courseID;
   let updateOps = {};
-  for(const ops of req.body) {
+  for (const ops of req.body) {
     updateOps[ops.propName] = ops.value;
   }
   console.log(updateOps);
