@@ -1,9 +1,29 @@
 .courselist {
   //border: 1px solid #aaa;
-  margin: 10px 0;
-  padding: 0 10px;
+  margin: 20px 0;
+  position: absolute;
+  transition-duration: 0.5s;
+  transform: translateX(-800px);
+  opacity: 0;
 
+  &.active {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
   .course {
-    
+    font-size: 1.2rem;
+    margin: 0;
+    padding-block-start: 0.5rem;
+    padding-block-end: 0.5rem;
+    transition-duration: 0.1s;
+    border-radius: 3px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #efa114;
+      box-shadow: 0 0 9px -1px #666;
+      padding-left: 5px;
+    }
   }
 }

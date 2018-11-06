@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Searchbox from './Searchbox';
 import CourseList from './CourseList';
+import Course from './Course';
 
 import '../styles/_filterview.scss';
 
@@ -9,7 +10,8 @@ class FilterView extends Component {
 
   state = {
     filteredCourses: [],
-    searchString: ''
+    searchString: '',
+    activeCourse: null
   }
 
   onChange = value => {
@@ -26,18 +28,30 @@ class FilterView extends Component {
       filteredCourses,
       searchString: value
     });
+  }
 
+  viewCourse = course => {
+    const { activeCourse } = this.state;
+    if(activeCourse) return;
+
+    this.setState({ activeCourse: course })
   }
 
   render() {
-    const { filteredCourses } = this.state;
+    const { filteredCourses, activeCourse } = this.state;
     return (
       <div className='filter-view'>
         <Searchbox 
+          course={activeCourse}          
           onChange={this.onChange}
         />
         <CourseList 
+          viewCourse={this.viewCourse}
           courses={filteredCourses}
+          course={activeCourse}          
+        />
+        <Course 
+          course={activeCourse}
         />
       </div>
     );

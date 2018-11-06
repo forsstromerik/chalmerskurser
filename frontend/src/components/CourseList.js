@@ -6,15 +6,20 @@ class CourseList extends Component {
 
   renderCourses = courseList => {
     return courseList.map((course, i) => {
-      return <p key={i} className='course'>{`${course.code} - ${course.name} [${course.credits} hp]`}</p>
+      return <p key={i} className='course' onClick={() => this.props.viewCourse(course)}>
+        <span>{course.code}</span>
+        <span> - </span>
+        <span>{course.name}</span>
+        <span>{` [${course.credits} hp]`}</span>
+      </p>
     })
   }
 
   render() {
-    const { courses } = this.props;
+    const { course, courses } = this.props;
     let courseList = this.renderCourses(courses);
     return (
-      <div className='courselist'>
+      <div className={`courselist${course ? '' : ' active'}`}>
       {courseList}
       </div>
     );

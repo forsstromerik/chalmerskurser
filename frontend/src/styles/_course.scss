@@ -1,0 +1,14 @@
+.course-info {
+  width: 50%;
+  min-width: 800px;
+  position: absolute;
+  transform: translateX(800px);
+  margin-top: 20px;
+  transition-duration: 0.5s;
+  opacity: 0;
+
+  &.active {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

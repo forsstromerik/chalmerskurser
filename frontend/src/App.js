@@ -13,7 +13,6 @@ class App extends Component {
 
   componentDidMount() {
     axios.get('http://localhost:3030/courses').then(res => {
-      console.log(res.data);
       this.setState({ data: res.data })
     })
     .catch(err => {
