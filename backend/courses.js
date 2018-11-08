@@ -59,7 +59,7 @@ router.post('/course', (req, res) => {
 router.post('/', (req, res) => {
   Promise.all(req.body.res.map(obj => {
     Course.findOne({ code: obj.code }, (err, c) => {
-      /* Don't store duplicates */
+      /* Don't store dup */
       if (c) { 
         console.log(`Error. Course already exists: ${c.code} - ${c.name}`);
         return;
@@ -192,7 +192,6 @@ router.delete('/:courseID', (req, res) => {
       console.log(err);
       res.status(500).json({ error: err });
     })
-
 })
 
 module.exports = router;

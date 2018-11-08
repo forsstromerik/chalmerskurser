@@ -9,7 +9,6 @@ const FETCH_URL = `${process.env.BASE_FETCH_URL}&batch_size=${process.env.BATCH_
 console.log('Scraper started. Fetching list...');
 
 axios.get(FETCH_URL).then(res => {
-  //let str = JSON.stringify(res.data);
   console.log('List retrieved. Parsing data.');
   let buffer = Buffer.from(res.data);
   fs.writeFile(`${process.env.UNPARSED_LIST_PATH}`, buffer, 'utf8', (err) => {

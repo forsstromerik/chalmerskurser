@@ -1,10 +1,10 @@
 .courselist {
-  //border: 1px solid #aaa;
   margin: 20px 0;
   position: absolute;
   transition-duration: 0.5s;
   transform: translateX(-800px);
   opacity: 0;
+  min-width: 800px;
 
   &.active {
     transform: translateX(0);
@@ -17,6 +17,7 @@
     padding-block-start: 0.5rem;
     padding-block-end: 0.5rem;
     transition-duration: 0.1s;
+    width: 100%;
 
     &:hover {
       cursor: pointer;

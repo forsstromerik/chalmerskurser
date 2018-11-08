@@ -17,7 +17,7 @@ class FilterView extends Component {
 
   onChange = value => {
     value = value.toLowerCase();
-    //if(value.length < 2) return;
+    if(value.length < 2) return;
     const { courses } = this.props;
     const filteredCourses = courses.filter(course => {
       let regexp = RegExp(value);

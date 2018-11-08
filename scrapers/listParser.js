@@ -62,7 +62,6 @@ module.exports = listParser = arr => {
       let ans = RegExp(/<a.+>(.+)<\/a>/).exec(arr[i]);
       if(ans !== null) {
         course.code = ans[1];
-        //course.id = ans[1];
       }
     }
     else if(counter === 2 && changedNum) {
