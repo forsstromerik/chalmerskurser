@@ -1,6 +1,6 @@
 .searchbox {
   height: 2rem;
-  width: 700px;
+  width: 100%;
   font-size: 1.4rem;
   outline: unset;
   padding-left: 5px;
@@ -22,4 +22,8 @@
     transform: translateY(-1.8rem);
     font-size: 1rem;
   }
+}
+
+input:disabled {
+  color: black;
 }

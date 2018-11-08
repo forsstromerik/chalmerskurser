@@ -23,7 +23,8 @@ class FilterView extends Component {
       let regexp = RegExp(value);
       return  course.name.toLowerCase().match(regexp)       ||
               course.code.toLowerCase().match(regexp)       ||
-              course.examinator.toLowerCase().match(regexp);
+              course.examinator.toLowerCase().match(regexp) ||
+              course.credits.toLowerCase().match(regexp);
     });
     this.setState({
       filteredCourses,
@@ -34,8 +35,16 @@ class FilterView extends Component {
   viewCourse = course => {
     const { activeCourse } = this.state;
     if(activeCourse) return;
-
     this.setState({ activeCourse: course }, this.fetchMore(course));
+    this.scrollTop();
+  }
+
+  scrollTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto"});
+  }
+
+  goBack = () => {
+    this.setState({ activeCourse: null })
   }
 
   fetchMore = course => {
@@ -55,7 +64,7 @@ class FilterView extends Component {
     return (
       <div className='filter-view'>
         <Searchbox 
-          course={activeCourse}          
+          course={activeCourse}
           onChange={this.onChange}
         />
         <CourseList 
@@ -65,6 +74,7 @@ class FilterView extends Component {
         />
         <Course 
           course={activeCourse}
+          goBack={this.goBack}
         />
       </div>
     );

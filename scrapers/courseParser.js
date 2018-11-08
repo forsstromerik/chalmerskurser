@@ -92,6 +92,14 @@ parseWithRegex = (arr, course) => {
     if(addToSyllabus){
       let stop = RegExp(/\W*<\/div>/).exec(arr[i]);
       if(stop) {
+        let match1 = RegExp(/\W*<\/div>/).exec(arr[i + 1]);
+        let match2 = RegExp(/\W*<\/td>/).exec(arr[i + 1]);
+        let j = 1;
+        while(!(match1 || match2)) {
+          HTMLstring += arr[i + j++].toString();
+          match1 = RegExp(/\W*<\/div>/).exec(arr[i + j]);
+          match2 = RegExp(/\W*<\/td>/).exec(arr[i + j]);
+        }
         addToSyllabus = false;
         updatedCourse.syllabus = HTMLstring;
       } else {
@@ -103,7 +111,6 @@ parseWithRegex = (arr, course) => {
 }
 
 save = (course, last) => {
-  console.log(course);
   axios.post(`${process.env.DB_BASE_URL}course`, { course }).then(res => {
     console.log(`Saved ${course.code} - ${course.name} to database successfully!`);
   }).catch(err => {

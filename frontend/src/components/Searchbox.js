@@ -17,14 +17,14 @@ class Searchbox extends Component {
 
     if(!focused && b) {
       this.setState({ focused: true });
-    } else if (focused && !b && this.input.value === '') {
+    } else if (focused && !b && this.input.value === '' ) {
       this.setState({ focused: false });
     }
   }
 
   componentDidUpdate(prevProps) {
     if(!prevProps.course && this.props.course) {
-      this.input.value = this.props.course.name;
+      this.input.value = `${this.props.course.code} - ${this.props.course.name}`;
     } else if (prevProps.course && !this.props.course) {
       this.input.value = '';
     }
@@ -34,12 +34,15 @@ class Searchbox extends Component {
 
     const { focused } = this.state;
     const { course } = this.props;
+
+    if (course) this.toggleFocus(true);
+
     return [
       <label 
         ref={ref => this.label = ref}
         className={`input-label${focused ? ' focused' : ''}`}
         for='input'>
-          Kursnamn/kurskod/examinator
+          Kursnamn/kurskod/examinator/hp
       </label>,
       <input 
         disabled={course}

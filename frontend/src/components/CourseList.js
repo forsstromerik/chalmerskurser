@@ -20,7 +20,7 @@ class CourseList extends Component {
     let courseList = this.renderCourses(courses);
     return (
       <div className={`courselist${course ? '' : ' active'}`}>
-      {courseList}
+        {courseList}
       </div>
     );
   }

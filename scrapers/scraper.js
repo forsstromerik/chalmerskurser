@@ -24,9 +24,7 @@ axios.get(FETCH_URL).then(res => {
 
       /* Need to get more data from each course page */
       console.log('Scraping more info for each course. This will take a while...');
-      courseParser(parsedList).then(res => {
-        // console.log("Saved all courses - finished!");
-      })
+      courseParser(parsedList);
   });
   })
 })
