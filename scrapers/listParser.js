@@ -4,7 +4,6 @@ module.exports = listParser = arr => {
   let changedNum = false;
   let parsedList = [];
   let course = {
-    //id: '',
     code: '',
     name: '',
     credits: '',
@@ -36,7 +35,6 @@ module.exports = listParser = arr => {
         parsedList.push(course);
       } 
       course = {
-        //id: '',
         code: '',
         name: '',
         credits: '',

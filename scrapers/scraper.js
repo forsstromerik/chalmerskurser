@@ -18,7 +18,6 @@ axios.get(FETCH_URL).then(res => {
       if (err) throw err;
       let arr = data.split(/[\r\n]+/g);
 
-
       /* Turn ugly file into array of course objects */
       console.log('Creating course objects.');
       let parsedList = listParser(arr);

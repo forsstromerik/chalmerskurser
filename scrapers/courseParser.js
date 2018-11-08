@@ -12,7 +12,7 @@ module.exports = courseParser = arr => {
         axios.get(arr[index++].url)
         .then(async res => {
           let parsed = await parseHTML(res.data, arr[index - 1]);
-
+          console.log(parsed);
           /* TODO: More failsafe: Save post immediately instead */
           list.push(parsed);
         })
@@ -52,7 +52,7 @@ parseWithRegex = (arr, course) => {
   let checkNextRow = false;
   let updatedCourse = { ...course };
   let addToSyllabus = false;
-  let stringArr = [];
+  let HTMLstring = '';
   for (let i = 0; i < arr.length; i++) {
     let ans = RegExp(/\s+?<td style="border-style: none solid none none; border-width: 1px; border-color: #cccccc">&nbsp;<\/td>/).exec(arr[i]);
     if(ans !== null && !stopCount) {
@@ -92,15 +92,12 @@ parseWithRegex = (arr, course) => {
       addToSyllabus = true;
     }
     if(addToSyllabus){
-      let stop = RegExp(/\S*?<\/table/).exec(arr[i]);
+      let stop = RegExp(/\W*<\/div>/).exec(arr[i]);
       if(stop) {
         addToSyllabus = false;
-        updatedCourse.syllabus = stringArr;
+        updatedCourse.syllabus = HTMLstring;
       } else {
-        let tmp = arr[i].replace(/<[^>]*>/gm, '').replace(/\s+\W+/, '').replace(/\\\w/gm, '');
-        if(tmp && tmp !== '\t' && !tmp.match(/\S+="/) && !tmp.match(/\S+:"?\d?/) && !tmp.match(/\w+\.\w+/)){
-          stringArr.push(tmp)
-        }
+        HTMLstring += arr[i];
       }
     }
   }
