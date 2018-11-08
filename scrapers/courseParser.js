@@ -12,13 +12,11 @@ module.exports = courseParser = arr => {
         axios.get(arr[index++].url)
         .then(async res => {
           let parsed = await parseHTML(res.data, arr[index - 1]);
-          console.log(parsed);
-          /* TODO: More failsafe: Save post immediately instead */
           list.push(parsed);
+          save(parsed, index === arr.length);
         })
         .catch(() => {
-          clearInterval(timer);
-          reject(list);                        
+          console.log(`Failed fetching any new data for ${arr[index - 1].code} - ${arr[index - 1].name}`);
         });
       } else {
         clearInterval(timer);
@@ -97,9 +95,23 @@ parseWithRegex = (arr, course) => {
         addToSyllabus = false;
         updatedCourse.syllabus = HTMLstring;
       } else {
-        HTMLstring += arr[i];
+        HTMLstring += arr[i].toString();
       }
     }
   }
   return updatedCourse;
 }
+
+save = (course, last) => {
+  console.log(course);
+  axios.post(`${process.env.DB_BASE_URL}course`, { course }).then(res => {
+    console.log(`Saved ${course.code} - ${course.name} to database successfully!`);
+  }).catch(err => {
+    console.log(`Error: could not save ${course.code} - ${course.name} to database`);
+    console.log(err.response.data);
+  }).then(() => {
+    if(last) {
+      console.log('Saved all courses - finished!');
+    }
+  })
+} 

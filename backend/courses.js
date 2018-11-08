@@ -4,37 +4,45 @@ const mongoose = require('mongoose');
 
 const Course = require('./course');
 
-/* TODO: As of now, there is no check for already existing courses,
-** which means that we are storing duplicates */
-
 /* Post new course to db */
 router.post('/course', (req, res) => {
-  Course.findOne({ code: req.body.code }, (err, c) => {
 
-    /* Don't store duplicates */
+  if(!(req && req.body && req.body.course && req.body.course.code && req.body.course.name)) {
+    res.status(400).json({
+      error: 'Error: not valid parameters'
+    });
+    return;
+  }
+
+  /* Check for dup */
+  Course.findOne({ code: req.body.course.code }, (err, c) => {
+
+    /* Don't store dup */
     if (c) { 
       console.log(`Error. Course already exists: ${c}`);
+      res.status(403).json({
+        error: 'Error: course already exists'
+      })
       return;
     }; 
 
     const course = new Course({
       _id: new mongoose.Types.ObjectId(),
-      code: req.body.code,
-      name: req.body.name,
-      url: req.body.url,
-      credits: req.body.credits,
-      institution: req.body.institution,
-      homepage: req.body.homepage,
-      sp: req.body.sp,
-      examinator: req.body.examinator,
-      examinatorURL: req.body.examinatorURL,
-      syllabus: req.body.syllabus
+      code: req.body.course.code,
+      name: req.body.course.name,
+      url: req.body.course.url,
+      credits: req.body.course.credits,
+      institution: req.body.course.institution,
+      homepage: req.body.course.homepage,
+      sp: req.body.course.sp,
+      examinator: req.body.course.examinator,
+      examinatorURL: req.body.course.examinatorURL,
+      syllabus: req.body.course.syllabus
     });
 
     course
       .save()
       .then(_res => {
-        console.log(_res);
         res.status(201).json({
           message: 'Handling POST request to /courses/course',
           createdCourse: course
@@ -51,7 +59,6 @@ router.post('/course', (req, res) => {
 router.post('/', (req, res) => {
   Promise.all(req.body.res.map(obj => {
     Course.findOne({ code: obj.code }, (err, c) => {
-      console.log(obj.code);
       /* Don't store duplicates */
       if (c) { 
         console.log(`Error. Course already exists: ${c.code} - ${c.name}`);
@@ -88,25 +95,45 @@ router.post('/', (req, res) => {
 
 /* Get all courses */
 router.get('/', (req, res) => {
-  Course.find()
-    .exec()
-    .then(docs => {
-      console.log(docs);
-      res.status(200).json(docs);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ error: err });
-    })
+  if (req.query.minify === 'true') {
+    Course.find({}, { 
+      code: true, 
+      name: true, 
+      credits: true, 
+      examinator: true
+    }).exec().then(docs => {
+        res.status(200).json(docs);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ error: err });
+      })
+  } else {
+    Course.find()
+      .exec()
+      .then(docs => {
+        res.status(200).json(docs);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ error: err });
+      })
+  }
 })
 
 /* Get specific course */
 router.get('/:courseID', (req, res) => {
   const id = req.params.courseID;
-  Course.findById(id)
+  if (req.query.minify === 'true') {
+    Course.findById(id, {
+      _id: false,
+      code: false, 
+      name: false, 
+      credits: false, 
+      examinator: false
+    })
     .exec()
     .then(doc => {
-      console.log(doc);
       if(doc) {
         res.status(200).json(doc);
       } else {
@@ -117,6 +144,21 @@ router.get('/:courseID', (req, res) => {
       console.log(err);
       res.status(500).json({ error: err });
     });
+  } else {
+    Course.findById(id)
+      .exec()
+      .then(doc => {
+        if(doc) {
+          res.status(200).json(doc);
+        } else {
+          res.status(404).json({ message: 'No course found' });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ error: err });
+      });
+  }
 })
 
 /* Make changes to specific course */
@@ -126,12 +168,10 @@ router.patch('/:courseID', (req, res) => {
   for(const ops of req.body) {
     updateOps[ops.propName] = ops.value;
   }
-  console.log(updateOps);
 
   Course.update({ _id: id }, { $set: updateOps })
     .exec()
     .then(_res => {
-      console.log(_res);
       res.status(200).json(_res)
     })
     .catch(err => {

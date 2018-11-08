@@ -13,7 +13,7 @@ module.exports = listParser = arr => {
     sp: '',
     examinator: '',
     examinatorURL: '',
-    syllabus: []
+    syllabus: ''
   }
 
   /* Find the line in the file to start from */
@@ -44,7 +44,7 @@ module.exports = listParser = arr => {
         sp: '',
         examinator: '',
         examinatorURL: '',
-        syllabus: []
+        syllabus: ''
       }
     }
     if(arr[i].match(/\s+<tr/)) {

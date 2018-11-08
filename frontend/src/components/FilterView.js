@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Searchbox from './Searchbox';
 import CourseList from './CourseList';
@@ -34,7 +35,19 @@ class FilterView extends Component {
     const { activeCourse } = this.state;
     if(activeCourse) return;
 
-    this.setState({ activeCourse: course })
+    this.setState({ activeCourse: course }, this.fetchMore(course));
+  }
+
+  fetchMore = course => {
+    axios.get(`http://localhost:3030/courses/${course._id}?minify=true`).then(res => {
+
+    this.setState(prev => ({ 
+        activeCourse: {...prev.activeCourse, ...res.data} 
+      }))
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   render() {

@@ -8,7 +8,6 @@ class Course extends Component {
     const { course } = this.props;
 
     if(!course) return null;
-    console.log(course);
     /*  TODO: Complete this course info page.
               Modify scraping of syllabus in order to
               render syllabus via dangerouslySetInnerHTML.
