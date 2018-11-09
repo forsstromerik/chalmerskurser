@@ -124,14 +124,18 @@ router.get('/', (req, res) => {
 /* Get specific course */
 router.get('/:courseID', (req, res) => {
   const id = req.params.courseID;
-  if (req.query.minify === 'true') {
-    Course.findById(id, {
+  if(!id) return;
+
+  /* Query parameter could be _id or course code */
+  if(id.length > 8) {
+    Course.findById(id, req.query.minify === 'true' ? 
+    {
       _id: false,
       code: false, 
       name: false, 
       credits: false, 
       examinator: false
-    })
+    } : {})
     .exec()
     .then(doc => {
       if(doc) {
@@ -145,19 +149,14 @@ router.get('/:courseID', (req, res) => {
       res.status(500).json({ error: err });
     });
   } else {
-    Course.findById(id)
-      .exec()
-      .then(doc => {
-        if(doc) {
-          res.status(200).json(doc);
-        } else {
-          res.status(404).json({ message: 'No course found' });
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json({ error: err });
-      });
+    Course.findOne({ code: id }).exec()
+    .then(doc => {
+      if(doc) {
+        res.status(200).json(doc);
+      } else {
+        res.status(404).json({ message: 'No course found' });
+      }
+    })
   }
 })
 
