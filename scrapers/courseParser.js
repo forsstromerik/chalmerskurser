@@ -144,6 +144,8 @@ save = (course, last) => {
     if(last) {
       console.log('Saved all courses - finished!');
       console.log('');
+      console.log('############################################################');
+      console.log('');
     }
   })
 } 
