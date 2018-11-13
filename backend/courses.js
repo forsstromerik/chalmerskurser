@@ -6,85 +6,56 @@ const Course = require('./course');
 
 /* Post new course to db */
 router.post('/course', (req, res) => {
+  const course = new Course({
+    _id: new mongoose.Types.ObjectId(),
+    code: req.body.course.code,
+    name: req.body.course.name,
+    url: req.body.course.url,
+    credits: req.body.course.credits,
+    institution: req.body.course.institution,
+    homepage: req.body.course.homepage,
+    sp: req.body.course.sp,
+    examinator: req.body.course.examinator,
+    examinatorURL: req.body.course.examinatorURL,
+    syllabus: req.body.course.syllabus
+  });
 
-  if(!(req && req.body && req.body.course && req.body.course.code && req.body.course.name)) {
-    res.status(400).json({
-      error: 'Error: not valid parameters'
-    });
-    return;
-  }
-
-  /* Check for dup */
-  Course.findOne({ code: req.body.course.code }, (err, c) => {
-
-    /* Don't store dup */
-    if (c) { 
-      console.log(`Error. Course already exists: ${c}`);
-      res.status(403).json({
-        error: 'Error: course already exists'
-      })
-      return;
-    }; 
-
-    const course = new Course({
-      _id: new mongoose.Types.ObjectId(),
-      code: req.body.course.code,
-      name: req.body.course.name,
-      url: req.body.course.url,
-      credits: req.body.course.credits,
-      institution: req.body.course.institution,
-      homepage: req.body.course.homepage,
-      sp: req.body.course.sp,
-      examinator: req.body.course.examinator,
-      examinatorURL: req.body.course.examinatorURL,
-      syllabus: req.body.course.syllabus
-    });
-
-    course
-      .save()
-      .then(_res => {
-        res.status(201).json({
-          message: 'Handling POST request to /courses/course',
-          createdCourse: course
-        });
-      })
-      .catch(err => {
-        console.error(err); 
-        res.status(500).json({ error: err });
-      })
-  })  
+  course
+    .save()
+    .then(_res => {
+      res.status(201).json({
+        message: 'Handling POST request to /courses/course',
+        createdCourse: course
+      });
+    })
+    .catch(err => {
+      console.error(err); 
+      res.status(500).json({ error: err });
+    })
 })
 
 /* Post array of courses to db */
 router.post('/', (req, res) => {
-  Promise.all(req.body.res.map(obj => {
-    Course.findOne({ code: obj.code }, (err, c) => {
-      /* Don't store dup */
-      if (c) { 
-        console.log(`Error. Course already exists: ${c.code} - ${c.name}`);
-        return;
-      }; 
-
-      const course = new Course({
-        _id: new mongoose.Types.ObjectId(),
-        code: obj.code,
-        name: obj.name,
-        url: obj.url,
-        credits: obj.credits,
-        institution: obj.institution,
-        homepage: obj.homepage,
-        sp: obj.sp,
-        examinator: obj.examinator,
-        examinatorURL: obj.examinatorURL,
-        syllabus: obj.syllabus
-      });
-      course.save()
-      .then(_res => {
-        console.log("Saved");
-      })
-      .catch(err => {
-        console.log(err);
-      })
+  Promise.all(req.body.res.map(obj => { 
+    const course = new Course({
+      _id: new mongoose.Types.ObjectId(),
+      code: obj.code,
+      name: obj.name,
+      url: obj.url,
+      credits: obj.credits,
+      institution: obj.institution,
+      homepage: obj.homepage,
+      sp: obj.sp,
+      examinator: obj.examinator,
+      examinatorURL: obj.examinatorURL,
+      syllabus: obj.syllabus
+    });
+    course.save()
+    .then(_res => {
+      console.log("Saved");
+    })
+    .catch(err => {
+      console.log(err);
     })
   })).then(() => {
     res.status(201).json({ message: 'Courses created' });
@@ -164,19 +135,19 @@ router.get('/:courseID', (req, res) => {
 router.patch('/:courseID', (req, res) => {
   const id = req.params.courseID;
   let updateOps = {};
-  for(const ops of req.body) {
-    updateOps[ops.propName] = ops.value;
+  for(const ops of Object.keys(req.body.course)) {
+    updateOps[ops] = req.body.course[ops]
   }
-
-  Course.update({ _id: id }, { $set: updateOps })
-    .exec()
-    .then(_res => {
-      res.status(200).json(_res)
+  
+  Course.findOneAndUpdate(id.length > 8 ? { _id: id } : { code: id }, { $set: updateOps })
+  .exec()
+  .then(_res => {
+    res.status(200).json(updateOps)
     })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ error: err });
-    });
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({ error: err });
+  });  
 })
 
 /* Remove a course from db */

@@ -6,6 +6,9 @@ module.exports = courseParser = arr => {
   return new Promise((resolve, reject) => {
     let index = 0;
     let list = [];
+    console.log('');
+    console.log('-----------------------------------------------------------');
+    console.log('');
     let timer = setInterval(() => {
       if (index < arr.length) {
         console.log(`Querying item ${index + 1} of ${arr.length}: ${arr[index].code} - ${arr[index].name}`);
@@ -111,14 +114,61 @@ parseWithRegex = (arr, course) => {
 }
 
 save = (course, last) => {
-  axios.post(`${process.env.DB_BASE_URL}course`, { course }).then(res => {
+  axios.post(`${process.env.API_BASE_URL}course`, { course }).then(res => {
     console.log(`Saved ${course.code} - ${course.name} to database successfully!`);
-  }).catch(err => {
+  }).catch(async err => {
     console.log(`Error: could not save ${course.code} - ${course.name} to database`);
     console.log(err.response.data);
+
+    console.log(`Will try to update existing course ${course.code} - ${course.name}`);
+    console.log(`Checking all object values for ${course.code} - ${course.name} before patching`);
+
+    if(validate(course)) {
+      console.log(`Values seem to be ok, patching course`);
+      try {
+        await patchCourse(course);
+        console.log('Successfully patched course');
+      } catch(err) {
+        console.log('Error, could not patch course');
+        console.log(err);
+      }
+    } else {
+      console.log(`Error: Something is wrong with the course object:`);
+      console.log(course);
+      // TODO: Send myself an email about this
+    }
   }).then(() => {
+    console.log('');
+    console.log('-----------------------------------------------------------');
+    console.log('');
     if(last) {
       console.log('Saved all courses - finished!');
+      console.log('');
     }
   })
 } 
+
+validate = course => {
+  return (
+    course.code &&
+    course.name &&
+    course.credits &&
+    course.institution &&
+    course.url &&
+    course.sp &&
+    course.examinator &&
+    course.syllabus
+  );
+}
+
+patchCourse = async course => {
+  return new Promise((resolve, reject) => {
+    axios.patch(`${process.env.API_BASE_URL}${course.code}`, { course })
+    .then(res => {
+      resolve(res);
+    })
+    .catch(err => {
+      reject(err);
+    })
+  })
+}
