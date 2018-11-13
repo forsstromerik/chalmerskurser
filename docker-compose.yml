@@ -1,0 +1,28 @@
+version: '3'
+services: 
+  mongo: 
+    container_name: docker-mongo
+    image: mongo:4
+    restart: always
+    ports:
+      - '27017:27017'
+  backend:
+    container_name: docker-backend
+    image: node:10
+    restart: always
+    volumes:
+      - './backend:/usr/src/backend'
+      - './backend/startup.sh:/tmp/startup.sh'
+    command: /bin/sh /tmp/startup.sh
+    ports:
+      - '3001:3000'
+  scraper:
+    container_name: docker-scraper
+    image: node:10
+    restart: always
+    volumes:
+      - './scraper:/usr/src/scraper'
+      - './scraper/startup.sh:/tmp/startup.sh'
+    command: /bin/sh /tmp/startup.sh
+    ports:
+      - '3002:3000'
