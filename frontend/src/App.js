@@ -12,7 +12,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/courses?minify=true').then(res => {
+    axios.get('http://0.0.0.0:3001/courses?minify=true').then(res => {
       this.setState({ data: res.data })
     })
     .catch(err => {
