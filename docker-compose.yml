@@ -15,6 +15,7 @@ services:
     volumes:
       - './backend:/usr/src/backend'
       - './backend/startup.sh:/tmp/startup.sh'
+      - '/etc/letsencrypt/live/chalmerskurser.se:/etc/letsencrypt/live/chalmerskurser.se'
     command: /bin/sh /tmp/startup.sh
     ports:
       - '3001:443'
