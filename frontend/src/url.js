@@ -1,3 +1,3 @@
-const url = () => '0.0.0.0';
+const url = 'localhost';
 
 export default url;

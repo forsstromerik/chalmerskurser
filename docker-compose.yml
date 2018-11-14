@@ -4,6 +4,8 @@ services:
     container_name: docker-mongo
     image: mongo:4
     restart: always
+    volumes:
+      - '/data/db:/data/db'
     ports:
       - '27017:27017'
   backend:
