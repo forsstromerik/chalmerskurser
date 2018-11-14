@@ -31,7 +31,8 @@ try {
   httpsServer.listen(process.env.PORT, () => {
     console.log(`HTTPS Server running on port ${process.env.PORT}`);
   });
-} catch {
+} catch(err) {
+  console.log(err);
   app.listen(3000, () => {
     console.log(`HTTPS Server running on port 80`);
   })

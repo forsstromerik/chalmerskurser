@@ -3,6 +3,9 @@
 # data
 /data
 
+# url
+/frontend/src/url.js
+
 # dependencies
 /node_modules
 
