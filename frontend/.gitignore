@@ -3,6 +3,9 @@
 # data
 /data
 
+# url
+url.js
+
 # dependencies
 /node_modules
 
