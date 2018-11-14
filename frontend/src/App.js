@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import FilterView from './components/FilterView';
 
+import url from './url';
+
 import './styles/_mainview.scss';
 
 class App extends Component {
@@ -12,7 +14,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://0.0.0.0:3001/courses?minify=true').then(res => {
+    axios.get(`http://${url}:3001/courses?minify=true`).then(res => {
       this.setState({ data: res.data })
     })
     .catch(err => {

@@ -5,6 +5,8 @@ import Searchbox from './Searchbox';
 import CourseList from './CourseList';
 import Course from './Course';
 
+import url from '../url';
+
 import '../styles/_filterview.scss';
 
 class FilterView extends Component {
@@ -48,7 +50,7 @@ class FilterView extends Component {
   }
 
   fetchMore = course => {
-    axios.get(`http://0.0.0.0:3001/courses/${course._id}?minify=true`).then(res => {
+    axios.get(`http://${url}:3001/courses/${course._id}?minify=true`).then(res => {
 
     this.setState(prev => ({ 
         activeCourse: {...prev.activeCourse, ...res.data} 
