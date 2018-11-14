@@ -50,7 +50,7 @@ class FilterView extends Component {
   }
 
   fetchMore = course => {
-    axios.get(`http://${url}:3001/courses/${course._id}?minify=true`).then(res => {
+    axios.get(`${url}:3001/courses/${course._id}?minify=true`).then(res => {
 
     this.setState(prev => ({ 
         activeCourse: {...prev.activeCourse, ...res.data} 
