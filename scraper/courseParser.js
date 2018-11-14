@@ -118,7 +118,8 @@ save = (course, last) => {
     console.log(`Saved ${course.code} - ${course.name} to database successfully!`);
   }).catch(async err => {
     console.log(`Error: could not save ${course.code} - ${course.name} to database`);
-
+    console.log(err);
+    
     console.log(`Will try to update existing course ${course.code} - ${course.name}`);
     console.log(`Checking all object values for ${course.code} - ${course.name} before patching`);
 
