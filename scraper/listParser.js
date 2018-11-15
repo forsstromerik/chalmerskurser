@@ -5,15 +5,18 @@ module.exports = listParser = arr => {
   let parsedList = [];
   let course = {
     code: '',
-    name: '',
     credits: '',
-    institution: '',
-    url: '',
-    homepage: '',
-    sp: '',
     examinator: '',
     examinatorURL: '',
-    syllabus: ''
+    gradeType: '',
+    homepage: '',
+    institution: '',
+    name: '',
+    ownerProgram: '',
+    ownerProgramURL: '',
+    sp: '',
+    syllabus: '',
+    url: ''
   }
 
   /* Find the line in the file to start from */
@@ -36,15 +39,18 @@ module.exports = listParser = arr => {
       } 
       course = {
         code: '',
-        name: '',
         credits: '',
-        institution: '',
-        url: '',
-        homepage: '',
-        sp: '',
         examinator: '',
         examinatorURL: '',
-        syllabus: ''
+        gradeType: '',
+        homepage: '',
+        institution: '',
+        name: '',
+        ownerProgram: '',
+        ownerProgramURL: '',
+        sp: '',
+        syllabus: '',
+        url: ''
       }
     }
     if(arr[i].match(/\s+<tr/)) {

@@ -55,6 +55,7 @@ parseWithRegex = (arr, course) => {
   let addToSyllabus = false;
   let HTMLstring = '';
   for (let i = 0; i < arr.length; i++) {
+    //console.log(arr[i]);
     let ans = RegExp(/\s+?<td style="border-style: none solid none none; border-width: 1px; border-color: #cccccc">&nbsp;<\/td>/).exec(arr[i]);
     if(ans !== null && !stopCount) {
       startCount = true;
@@ -108,6 +109,15 @@ parseWithRegex = (arr, course) => {
       } else {
         HTMLstring += arr[i].toString();
       }
+    }
+    let ownerProgram = RegExp(/\s*<td.*Ägare:.*href="(.*)">(.*)<\/a><\/td>/).exec(arr[i]);
+    if (ownerProgram) {
+      updatedCourse.ownerProgram = ownerProgram[2];
+      updatedCourse.ownerProgramURL = `${process.env.BASE_URL}${ownerProgram[1]}`;
+    }
+    const gradeType = RegExp(/\W*<td.*<b>\W*(Betygskala:)\W*<\/b>\W*(.*)\W*<\/td>/).exec(arr[i]);
+    if(gradeType) {
+      updatedCourse.gradeType = gradeType[2];
     }
   }
   return updatedCourse;
