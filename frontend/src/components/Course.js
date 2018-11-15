@@ -73,6 +73,7 @@ class Course extends Component {
   render() {
     const { course } = this.props;
     let courseInfo = this.renderCourseInfo();
+    console.log(course);
     return (
       <div className={`course-info${course ? ' active' : ''}`}>
         <button onClick={this.props.goBack} className='back-button'>{`⬅ Tillbaka`}</button>

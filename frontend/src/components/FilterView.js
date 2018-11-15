@@ -90,8 +90,18 @@ class FilterView extends Component {
     }
   }
 
+  redirect = () => {
+    if (!this.state.return) return null;
+    if (window.location.href[window.location.href.length - 1] !== '/'){
+      return <Redirect to='/' />
+    } else {
+      return null;
+    }
+  }
+
   render() {
     const { filteredCourses, activeCourse, searchString } = this.state;
+    let redirect = this.redirect();
     return (
       <div className='main'>
         <div className='filter-view'>
@@ -109,7 +119,7 @@ class FilterView extends Component {
             course={activeCourse}
             goBack={this.goBack}
           />
-          {this.state.return && <Redirect to='/' />}
+          {redirect}
         </div>
       </div>
     );
