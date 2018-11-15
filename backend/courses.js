@@ -9,15 +9,18 @@ router.post('/course', (req, res) => {
   const course = new Course({
     _id: new mongoose.Types.ObjectId(),
     code: req.body.course.code,
-    name: req.body.course.name,
-    url: req.body.course.url,
     credits: req.body.course.credits,
-    institution: req.body.course.institution,
-    homepage: req.body.course.homepage,
-    sp: req.body.course.sp,
     examinator: req.body.course.examinator,
     examinatorURL: req.body.course.examinatorURL,
-    syllabus: req.body.course.syllabus
+    gradeType: req.body.course.gradeType,
+    homepage: req.body.course.homepage,
+    institution: req.body.course.institution,
+    name: req.body.course.name,
+    ownerProgram: req.body.course.ownerProgram,
+    ownerProgramURL: req.body.course.ownerProgramURL,
+    sp: req.body.course.sp,
+    syllabus: req.body.course.syllabus,
+    url: req.body.course.url
   });
 
   course
@@ -40,15 +43,18 @@ router.post('/', (req, res) => {
     const course = new Course({
       _id: new mongoose.Types.ObjectId(),
       code: obj.code,
-      name: obj.name,
-      url: obj.url,
       credits: obj.credits,
-      institution: obj.institution,
-      homepage: obj.homepage,
-      sp: obj.sp,
       examinator: obj.examinator,
       examinatorURL: obj.examinatorURL,
-      syllabus: obj.syllabus
+      gradeType: obj.gradeType,
+      homepage: obj.homepage,
+      institution: obj.institution,
+      name: obj.name,
+      ownerProgram: obj.ownerProgram,
+      ownerProgramURL: obj.ownerProgramURL,
+      sp: obj.sp,
+      syllabus: obj.syllabus,
+      url: obj.url
     });
     course.save()
     .then(_res => {
@@ -71,7 +77,10 @@ router.get('/', (req, res) => {
       code: true, 
       name: true, 
       credits: true, 
-      examinator: true
+      examinator: true,
+      ownerProgram: true,
+      sp: true,
+      institution: true
     }).exec().then(docs => {
         res.status(200).json(docs);
       })
@@ -105,7 +114,10 @@ router.get('/:courseID', (req, res) => {
       code: false, 
       name: false, 
       credits: false, 
-      examinator: false
+      examinator: false,
+      ownerProgram: false,
+      sp: false,
+      institution: false
     } : {})
     .exec()
     .then(doc => {
@@ -138,7 +150,7 @@ router.patch('/:courseID', (req, res) => {
   for(const ops of Object.keys(req.body.course)) {
     updateOps[ops] = req.body.course[ops]
   }
-  
+
   Course.findOneAndUpdate(id.length > 8 ? { _id: id } : { code: id }, { $set: updateOps })
   .exec()
   .then(_res => {

@@ -55,7 +55,6 @@ parseWithRegex = (arr, course) => {
   let addToSyllabus = false;
   let HTMLstring = '';
   for (let i = 0; i < arr.length; i++) {
-    //console.log(arr[i]);
     let ans = RegExp(/\s+?<td style="border-style: none solid none none; border-width: 1px; border-color: #cccccc">&nbsp;<\/td>/).exec(arr[i]);
     if(ans !== null && !stopCount) {
       startCount = true;
