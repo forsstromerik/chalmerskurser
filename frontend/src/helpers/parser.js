@@ -221,3 +221,20 @@ export const getProgramme = abbr => {
       return '';
   }
 }
+
+export const getSP = str => {
+  switch(str) {
+    case 'LP1':
+      return 'Läsperiod 1';
+    case 'LP2':
+      return 'Läsperiod 2';
+    case 'LP3':
+      return 'Läsperiod 3';
+    case 'LP4':
+      return 'Läsperiod 4';
+    case 'Ej LP':
+      return 'Ej Läsperiod';
+    default:
+      return '';
+  }
+}

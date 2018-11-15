@@ -4,4 +4,19 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
+  
+  .tip {
+    border: 1px solid #999;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    position: absolute;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #555;
+
+    p {
+      margin: 5px 0;
+    }
+  } 
 }

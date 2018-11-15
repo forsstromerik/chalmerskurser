@@ -1,4 +1,4 @@
-import { getInstitution, getProgramme } from './parser';
+import { getInstitution, getProgramme, getSP } from './parser';
 
 const KEYS = {
   a: 'name',
@@ -19,11 +19,13 @@ const matchQuery = (o, v) => {
   let found = false;
   for (const i in KEYS) {
     const reducedVal = 
-      i === 'g' ? 
-        smartReduce(getInstitution(o[KEYS[i]])) : 
       i === 'e' ?
-          concat(smartReduce(o[KEYS[i]]), smartReduce(getProgramme(o[KEYS[i]]))) :
-          smartReduce(o[KEYS[i]]);
+        concat(smartReduce(o[KEYS[i]]), smartReduce(getProgramme(o[KEYS[i]]))) :
+      i === 'f' ? 
+        concat(smartReduce(o[KEYS[i]]), smartReduce(getSP(o[KEYS[i]]))) :
+      i === 'e' ?
+        smartReduce(getInstitution(o[KEYS[i]])) : 
+        smartReduce(o[KEYS[i]]);
     const regexVal = RegExp(v); 
     if(reducedVal) {
       found |= !!reducedVal.match(regexVal);

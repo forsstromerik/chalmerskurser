@@ -107,6 +107,10 @@ class FilterView extends Component {
     let redirect = this.redirect();
     return (
       <div className='main'>
+        <span className='tip'>
+          <p>Kombinera queries med #</p>
+          <p>Ex: TKAUT # LP3 # 7,5</p>
+        </span>
         <div className='filter-view'>
           <Searchbox 
             course={activeCourse}
