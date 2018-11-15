@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${url}:3001/courses?minify=true`).then(res => {
+    axios.get(`${url}/courses?minify=true`).then(res => {
       this.setState({ data: res.data })
     })
     .catch(err => {

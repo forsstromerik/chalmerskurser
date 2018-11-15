@@ -6,6 +6,7 @@ import CourseList from './CourseList';
 import Course from './Course';
 
 import url from '../url';
+import smartSearch from '../helpers/smartSearch';
 
 import '../styles/_filterview.scss';
 
@@ -22,11 +23,7 @@ class FilterView extends Component {
     if(value.length < 2) return;
     const { courses } = this.props;
     const filteredCourses = courses.filter(course => {
-      let regexp = RegExp(value);
-      return  course.name.toLowerCase().match(regexp)       ||
-              course.code.toLowerCase().match(regexp)       ||
-              course.examinator.toLowerCase().match(regexp) ||
-              course.credits.toLowerCase().match(regexp);
+      return smartSearch(course, value);
     });
     this.setState({
       filteredCourses,
@@ -50,7 +47,7 @@ class FilterView extends Component {
   }
 
   fetchMore = course => {
-    axios.get(`${url}:3001/courses/${course._id}?minify=true`).then(res => {
+    axios.get(`${url}/courses/${course._id}?minify=true`).then(res => {
 
     this.setState(prev => ({ 
         activeCourse: {...prev.activeCourse, ...res.data} 

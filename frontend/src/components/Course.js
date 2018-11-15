@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import getInstitution from '../helpers/parseInstitution';
+import { getInstitution } from '../helpers/parser';
 
 import '../styles/_course.scss';
 
@@ -10,7 +10,7 @@ class Course extends Component {
     const { course } = this.props;
     if(course && Object.keys(course).length > 6) {
       return [
-        <div className='institution'>{getInstitution(course.institution)}</div>,
+        <div className='institution'>{`Institution: ${getInstitution(course.institution)}`}</div>,
         <div className='examinator-and-credits'>
           <div className='examinator'>{`Examinator: ${course.examinator}`}</div>
           <div className='credits'>{`${course.credits} hp`}</div>
@@ -42,11 +42,13 @@ class Course extends Component {
           </div>
         </div>,
         <div className='more-buttons'> 
+          {course.homepage &&
           <a href={course.homepage} target='_blank'>
             <button className='button'>
               🖥 Kurshemsida
             </button>
           </a>
+          }
           <a href={course.examinatorURL} target='_blank'>
             <button className='button'>
               💼 Examinatorns sida
