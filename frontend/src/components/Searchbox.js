@@ -26,17 +26,15 @@ class Searchbox extends Component {
     if(!prevProps.course && this.props.course) {
       this.input.value = `${this.props.course.code} - ${this.props.course.name}`;
     } else if (prevProps.course && !this.props.course) {
-      this.input.value = '';
+      this.input.value = this.props.searchString;
     }
   }
 
   render() {
-
     const { focused } = this.state;
     const { course } = this.props;
 
     if (course) this.toggleFocus(true);
-
     return [
       <label 
         key='0'

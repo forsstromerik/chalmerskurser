@@ -1,36 +1,14 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { Route, Switch } from 'react-router-dom';
 
 import FilterView from './components/FilterView';
 
-import url from './url';
-
-import './styles/_mainview.scss';
-
 class App extends Component {
-
-  state = {
-    data: []
-  }
-
-  componentDidMount() {
-    axios.get(`${url}/courses?minify=true`).then(res => {
-      this.setState({ data: res.data })
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }
-
   render() {
-    const { data } = this.state;
-
     return (
-      <div className='main'>
-        <FilterView 
-          courses={data}
-        />
-      </div>
+        <Switch>
+          <Route path='/' component={FilterView} />
+        </Switch>
     );
   }
 }
