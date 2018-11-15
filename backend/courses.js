@@ -154,7 +154,7 @@ router.patch('/:courseID', (req, res) => {
   Course.findOneAndUpdate(id.length > 8 ? { _id: id } : { code: id }, { $set: updateOps })
   .exec()
   .then(_res => {
-    res.status(200).json(updateOps)
+    res.status(200).json(_res)
     })
   .catch(err => {
     console.log(err);
