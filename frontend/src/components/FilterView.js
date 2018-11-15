@@ -45,7 +45,10 @@ class FilterView extends Component {
 
   onChange = value => {
     value = value.toLowerCase();
-    if(value.length < 2) return;
+    if(value.length < 2) {
+      this.setState({ filteredCourses: [] })
+      return;
+    };
     const { courses } = this.state;
     const filteredCourses = courses.filter(course => {
       return smartSearch(course, value);
