@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { getInstitution } from '../helpers/parser';
 
-import '../styles/_course.scss';
+import '../styles/_courseview.scss';
 
 class Course extends Component {
 
@@ -10,12 +10,12 @@ class Course extends Component {
     const { course } = this.props;
     if(course && Object.keys(course).length > 6) {
       return [
-        <div className='institution'>{`Institution: ${getInstitution(course.institution)}`}</div>,
-        <div className='examinator-and-credits'>
+        <div key='0' className='institution'>{`Institution: ${getInstitution(course.institution)}`}</div>,
+        <div key='1' className='examinator-and-credits'>
           <div className='examinator'>{`Examinator: ${course.examinator}`}</div>
           <div className='credits'>{`${course.credits} hp`}</div>
         </div>,
-        <div className='study-periods'>
+        <div key='2' className='study-periods'>
           <div className='row'>
             <div className='first-four'>
               <span className='lp1'>Läsperiod 1</span>
@@ -41,7 +41,7 @@ class Course extends Component {
             </div>
           </div>
         </div>,
-        <div className='more-buttons'> 
+        <div key='3' className='more-buttons'> 
           {course.homepage &&
           <a href={course.homepage} target='_blank'>
             <button className='button'>
@@ -55,9 +55,9 @@ class Course extends Component {
             </button>
           </a>
         </div>,
-        <h2>Kursplan</h2>,
-        <div className='set-inner' dangerouslySetInnerHTML={{__html: course.syllabus}} />,
-        <div className='bottom-button-holder'>
+        <h2 key='4'>Kursplan</h2>,
+        <div key='5' className='set-inner' dangerouslySetInnerHTML={{__html: course.syllabus}} />,
+        <div key='6' className='bottom-button-holder'>
           <a href={course.url} target='_blank'>
             <button className='bottom-button'>
               🖥 Gå till orginalsidan

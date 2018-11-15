@@ -66,7 +66,7 @@ class FilterView extends Component {
           course={activeCourse}
           onChange={this.onChange}
         />
-        <CourseList 
+        <CourseList
           viewCourse={this.viewCourse}
           courses={filteredCourses}
           course={activeCourse}          

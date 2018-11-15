@@ -39,12 +39,14 @@ class Searchbox extends Component {
 
     return [
       <label 
+        key='0'
         ref={ref => this.label = ref}
         className={`input-label${focused ? ' focused' : ''}`}
-        for='input'>
-          Kursnamn/kurskod/examinator/hp
+        htmlFor='input'>
+          Kursnamn/kurskod/examinator/hp/program/läsperiod/institution
       </label>,
       <input 
+        key='1'
         disabled={course}
         ref={ref => this.input = ref} 
         onFocus={() => this.toggleFocus(true)}

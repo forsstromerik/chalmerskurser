@@ -33,6 +33,7 @@ const matchQuery = (o, v) => {
 }
 
 const smartReduce = (value, split = false) => {
+    if(!value) return null;
     /* 
     * 1) Make query lowercase
     * 2) Separate with respect to divider: #
