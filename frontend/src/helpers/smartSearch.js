@@ -41,7 +41,7 @@ const smartReduce = (value, split = false) => {
             .toLowerCase()
             .split(split ? /#/ : /''/)
             .map(a => a.replace(/\s/gm, ''))
-            .filter(b => b != "")
+            .filter(b => b !== "")
     return split ? val : val[0];
 }
 
