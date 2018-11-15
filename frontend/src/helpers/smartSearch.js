@@ -25,7 +25,9 @@ const matchQuery = (o, v) => {
           concat(smartReduce(o[KEYS[i]]), smartReduce(getProgramme(o[KEYS[i]]))) :
           smartReduce(o[KEYS[i]]);
     const regexVal = RegExp(v); 
-    found |= !!reducedVal.match(regexVal);
+    if(reducedVal) {
+      found |= !!reducedVal.match(regexVal);
+    } 
   }
   return !!found;
 }
