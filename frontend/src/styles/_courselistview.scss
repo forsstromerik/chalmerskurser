@@ -3,15 +3,16 @@
   position: absolute;
   transition-duration: 0.5s;
   transform: translateX(-800px);
-  opacity: 0;
   width: 800px;
   
   &:not(.active) {
-    height: 0;
+    opacity: 0;
     overflow: hidden;
+    max-height: 0;
   }
   
   &.active {
+    max-height: 30000px;
     transform: translateX(0);
     opacity: 1;
   }
