@@ -22,11 +22,9 @@
     height: 2rem;
     background-color: #eee;
     border: 0;
-    border-bottom: 2px solid #f1a200;
-    border-left: 1px solid #f1a200;
+    border: 2px solid #f1a200;
     outline: unset;
     font-size: 1.2rem;
-    box-shadow: -2px 2px 3px -1px #555;
     transition-duration: 0.2s;
     
     &:hover {
@@ -92,7 +90,6 @@
           color: #bbb;
           pointer-events: none;
           user-select: none;
-          box-shadow: -2px 2px 3px -1px #555;
         }
       }
 
@@ -109,7 +106,6 @@
             color: #bbb;
             pointer-events: none;
             user-select: none;
-            box-shadow: -2px 2px 3px -1px #555;
           }
         }
   
@@ -121,7 +117,6 @@
             color: #bbb;
             pointer-events: none;
             user-select: none;
-            box-shadow: -2px 2px 3px -1px #555;
           }
         }
       }
@@ -137,14 +132,12 @@
     .button {
       background-color: #eee;
       border: none;
-      border-bottom: 2px solid #f1a200;
-      border-left: 1px solid #f1a200;
+      border: 2px solid #f1a200;
       width: 15rem;
       height: 4rem;
       font-size: 1.1rem;
       transition-duration: 0.2s;
       outline: none;
-      box-shadow: -2px 2px 3px -1px #555;
 
       &:hover {
         background-color: #f1a200;
@@ -154,7 +147,7 @@
   }
 
   h2 {
-    border-bottom: 1px solid #f3a300;
+    border-bottom: 1px solid #f1a200;
     padding-bottom: 10px;
   }
 
@@ -175,14 +168,12 @@
       margin: 50px auto;
       background-color: #eee;
       border: none;
-      border-bottom: 2px solid #f1a200;
-      border-left: 1px solid #f1a200;
+      border: 2px solid #f1a200;
       width: 15rem;
       height: 4rem;
       font-size: 1.1rem;
       transition-duration: 0.2s;
       outline: none;
-      box-shadow: -2px 2px 3px -1px #555;
   
       &:hover {
         background-color: #f1a200;

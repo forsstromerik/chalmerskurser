@@ -30,13 +30,17 @@ class CourseList extends Component {
   }
 
   render() {
-    const { course, courses } = this.props;
+    const { course, courses, showAll, searchTip, limit } = this.props;
     let courseList = this.renderCourses(courses);
     return (
       <div className={`courselist${course ? '' : ' active'}`}>
-        {courseList}
+      <div className={(searchTip && courseList.length > limit) ? 'search-tip active' : 'search-tip'}>
+        {(searchTip && courseList.length > limit) ? 
+          `Visar ${limit} av ${courses.length} resultat. Tryck [Enter] för att visa alla resultat` : ''}
       </div>
-    );
+        {showAll ? courseList : courseList.slice(0, limit)}
+      </div>
+    )
   }
 }
 

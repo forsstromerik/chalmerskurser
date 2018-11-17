@@ -1,5 +1,4 @@
 .courselist {
-  margin: 20px 0;
   position: absolute;
   transition-duration: 0.5s;
   transform: translateX(-800px);
@@ -15,6 +14,20 @@
     max-height: 30000px;
     transform: translateX(0);
     opacity: 1;
+  }
+
+  .search-tip {
+    height: 0;
+    color: #555;
+    padding: 5px;
+    font-size: 0.8rem;
+    transition: 0.5s;
+    margin-bottom: 10px;
+
+    &.active {
+      height: 1rem;
+      background-color: #efe4c7;
+    }
   }
   
   .course {
@@ -32,8 +45,8 @@
 
     &:hover {
       cursor: pointer;
-      background-color: #efa114;
-      box-shadow: 0 0 9px -1px #666;
+      background-color: #f1a200;
+      box-shadow: 0 0 3px -1px #666;
       padding-left: 5px;
     }
 

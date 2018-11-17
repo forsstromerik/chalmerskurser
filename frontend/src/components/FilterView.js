@@ -19,7 +19,10 @@ class FilterView extends Component {
     filteredCourses: [],
     searchString: '',
     activeCourse: null,
-    return: false
+    return: false,
+    showAll: false,
+    searchTip: false,
+    limit: 30
   }
 
   componentDidMount() {
@@ -55,7 +58,8 @@ class FilterView extends Component {
     });
     this.setState({
       filteredCourses,
-      searchString: value
+      searchString: value,
+      searchTip: this.state.searchTip && filteredCourses.length > this.state.limit
     });
   }
 
@@ -102,8 +106,24 @@ class FilterView extends Component {
     }
   }
 
+  showAll = show => {
+    this.setState({ showAll: show });
+  }
+
+  toggleSearchTip = toggle => {
+    const { filteredCourses } = this.state;
+    this.setState({ searchTip: (toggle && filteredCourses.length > this.state.limit) });
+  }
+
   render() {
-    const { filteredCourses, activeCourse, searchString } = this.state;
+    const { 
+      filteredCourses, 
+      activeCourse, 
+      searchString, 
+      showAll, 
+      searchTip, 
+      limit 
+    } = this.state;
     let redirect = this.redirect();
     return (
       <div className='main'>
@@ -116,11 +136,16 @@ class FilterView extends Component {
             course={activeCourse}
             onChange={this.onChange}
             searchString={searchString}
+            showAll={this.showAll}
+            toggleSearchTip={this.toggleSearchTip}
           />
           <CourseList
             viewCourse={this.viewCourse}
             courses={filteredCourses}
-            course={activeCourse}          
+            course={activeCourse}    
+            showAll={showAll}
+            searchTip={searchTip}
+            limit={limit}
           />
           <Course 
             course={activeCourse}

@@ -1,26 +1,24 @@
 .searchbox {
   height: 2rem;
   width: 100%;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   outline: unset;
   padding-left: 5px;
   background-color: #eee;
   border: none;
-  border-bottom: 2px solid #efa114;
+  border-bottom: 2px solid #f1a200;
 }
 
 .input-label {
   position: absolute;
   padding-left: 5px;
-  font-size: 1.8rem;
-  color: #000000;
+  font-size: 1.3rem;
+  color: #bdb7ab;
   pointer-events: none;
   transition-duration: 0.3s;
 
   &.focused {
-    font-weight: 700;
-    transform: translateY(-1.8rem);
-    font-size: 1rem;
+    transform: translateY(-1.5rem);
   }
 }
 
