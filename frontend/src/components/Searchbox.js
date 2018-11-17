@@ -35,8 +35,8 @@ class Searchbox extends Component {
     if(!prevProps.course && this.props.course) {
       this.toggleFocus(true)
     }
-    if(prevState.value.replace(/ g/, '').length === 0 && this.state.value.replace(/ g/, '').length > 0
-      || this.state.pressedEnter && this.state.value.replace(/ g/, '').length > prevState.value.replace(/ g/, '').length) {
+    if((prevState.value.replace(/ g/, '').length === 0 && this.state.value.replace(/ g/, '').length > 0)
+      || (this.state.pressedEnter && this.state.value.replace(/ g/, '').length > prevState.value.replace(/ g/, '').length)) {
       this.startTimer();
     }
     if(prevState.timer === 0 && this.state.timer === 1) {
