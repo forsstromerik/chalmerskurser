@@ -26,6 +26,9 @@
     outline: unset;
     font-size: 1.2rem;
     transition-duration: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
     &:hover {
       background-color: #f1a200;
