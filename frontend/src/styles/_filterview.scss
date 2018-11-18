@@ -4,3 +4,16 @@
   min-width: 800px;
   overflow: hidden;
 }
+
+@media screen and (max-width: 888px) {
+  .filter-view {
+    min-width: 90%;
+    padding-top: 100px;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .filter-view {
+    padding-top: 80px;
+  }
+}

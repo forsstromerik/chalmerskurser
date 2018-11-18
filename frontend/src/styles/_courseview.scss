@@ -73,6 +73,7 @@
         .lp5 {
           text-align: center;
           margin: 0 10px;
+          
           &.block {
             background-color: #bbb;
             color: #bbb;
@@ -84,6 +85,7 @@
         .lp6 {
           text-align: center;
           margin: 0 10px;
+
           &.block {
             background-color: #bbb;
             color: #bbb;
@@ -100,6 +102,7 @@
 
     div {
       margin: 10px 0;
+
       span:nth-child(1) {
        width: 15%;
        display: inline-block;
@@ -122,6 +125,7 @@
       font-size: 1.1rem;
       transition-duration: 0.2s;
       outline: none;
+
       &.not-found {
         background-color: #c7c7c757;
         border: 2px solid #b99b5e4d;
@@ -131,6 +135,7 @@
           cursor: not-allowed;
         }
       }
+
       &:hover:not(.not-found) {
         background-color: #f1a200;
         cursor: pointer;
@@ -179,5 +184,150 @@
   .footer {
     width: 100%;
     height: 120px;
+  }
+}
+
+@media screen and (max-width: 888px) {
+  .course-info {
+    transform: translateX(90%); 
+
+    &.active {
+      min-width: 90%;
+    }
+
+    .back-button {
+      width: 7rem;
+      height: 1.8rem;
+      font-size: 1rem;
+    }
+
+    .study-periods {
+      font-size: 0.8rem;
+    }
+
+    h2 {
+      margin-top: 40px;
+      font-size: 1.3rem;
+    }
+
+    .information {
+      font-size: 0.9rem;
+  
+      div {
+        margin: 8px 0;
+
+        span:nth-child(1) {
+         width: 20%;
+         max-width: 100px;
+       }
+      }
+    }
+
+    .more-buttons {
+      .button {
+        width: 13rem;
+        height: 3.5rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    .bottom-button-holder {
+      .bottom-button {
+        width: 13rem;
+        height: 3.5rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    .footer {
+      height: 80px;
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .course-info {
+    .study-periods {
+      font-size: 0.7rem;
+    }
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .course-info {
+    .back-button {
+      width: 6.5rem;
+      height: 1.7rem;
+      font-size: 0.8rem;
+    }
+    
+    .study-periods {
+      font-size: 0.6rem;
+      margin-top: 20px;
+
+      .row {
+        margin: 2px 0;
+        height: 15px;
+
+        &.block {
+          height: 20px;
+        }
+
+        .first-four {
+          flex-grow: 2;
+        }
+
+        .last-two {
+          flex-grow: 1;
+        }
+      } 
+    }
+    
+    h2 {
+      margin-top: 30px;
+      font-size: 1rem;
+    }
+
+    .information {
+      font-size: 0.8rem;
+  
+      div {
+        margin: 6px 0;
+
+        span:nth-child(1) {
+         width: 30%;
+         max-width: 85px;
+       }
+      }
+    }
+
+    .more-buttons {
+      .button {
+        width: 10rem;
+        height: 3.5rem;
+        font-size: 0.75rem;
+      }
+    }
+
+    .bottom-button-holder {
+      .bottom-button {
+        width: 10rem;
+        height: 3.5rem;
+        font-size: 0.75rem;
+      }
+    }
+
+    .footer {
+      height: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .course-info {
+    .study-periods {
+      font-size: 0.5rem;
+      margin-top: 15px;
+    }
   }
 }

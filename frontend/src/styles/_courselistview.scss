@@ -56,6 +56,7 @@
 
     .second-row {
       font-size: 0.8rem;
+      
       span {
         font-weight: 400;
         margin-right: 1rem;
@@ -67,6 +68,32 @@
         &.search-hit {
           background-color: #ced7f9;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 888px) {
+  .courselist {
+    width: 90%;
+
+    .course {
+      font-size: 0.9rem;
+
+      .second-row {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .courselist {
+    .course {
+      font-size: 0.7rem;
+
+      .second-row {
+        font-size: 0.6rem;
       }
     }
   }

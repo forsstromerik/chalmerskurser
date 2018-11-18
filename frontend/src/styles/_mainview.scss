@@ -20,3 +20,10 @@
     }
   } 
 }
+
+@media screen and (max-width: 888px) {
+  .main .tip {
+    right: auto;
+    text-align: center;
+  }
+}
