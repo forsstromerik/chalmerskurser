@@ -95,15 +95,12 @@ class FilterView extends Component {
 
   log = (code, name) => {
     const { searchString } = this.state;
-    console.log(code, name, searchString);
     let courseStat = {
       code,
       name,
       query: searchString
     }
-    axios.post(`${url}/courses/coursestat`, { courseStat }).then(res => {
-      console.log(res);
-    })
+    axios.post(`${url}/courses/coursestat`, { courseStat });
   }
 
   componentDidUpdate (prevProps, prevState) {
