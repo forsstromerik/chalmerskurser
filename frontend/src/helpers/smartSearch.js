@@ -23,7 +23,7 @@ const matchQuery = (o, v) => {
         concat(smartReduce(o[KEYS[i]]), smartReduce(getProgramme(o[KEYS[i]]))) :
       i === 'f' ? 
         concat(smartReduce(o[KEYS[i]]), smartReduce(getSP(o[KEYS[i]]))) :
-      i === 'e' ?
+      i === 'g' ?
         smartReduce(getInstitution(o[KEYS[i]])) : 
         smartReduce(o[KEYS[i]]);
     const regexVal = RegExp(v); 
