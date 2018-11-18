@@ -86,7 +86,7 @@ export const getProgramme = abbr => {
     case 'TKTEM': 
       return 'Teknisk Matematik, Civilingenjör';
     case 'TKAUT': 
-      return 'Automation Och Mekatronik, Civilingenjör';
+      return 'Automation och Mekatronik, Civilingenjör';
     case 'TKDES': 
       return 'Teknisk Design, Civilingenjör';
     case 'TKIEK': 
@@ -98,9 +98,9 @@ export const getProgramme = abbr => {
     case 'TKSAM': 
       return 'Samhällsbyggnadsteknik, Civilingenjör';
     case 'TKATK': 
-      return 'Arkitektur Och Teknik';
+      return 'Arkitektur och Teknik';
     case 'TIDSL': 
-      return 'Design Och Produktutveckling, Högskoleingenjör';
+      return 'Design och Produktutveckling, Högskoleingenjör';
     case 'TIELL': 
       return 'Elektroteknik, Högskoleingenjör';
     case 'TIKEL': 
@@ -114,55 +114,55 @@ export const getProgramme = abbr => {
     case 'TIDAL': 
       return 'Datateknik, Högskoleingenjör';
     case 'TIEPL': 
-      return 'Ekonomi Och Produktionsteknik, Högskoleingenjör';
+      return 'Ekonomi och Produktionsteknik, Högskoleingenjör';
     case 'MPMEI': 
       return 'Innovationsledning, Masterprogram';
     case 'MPPDE': 
       return 'Produktutveckling, Masterprogram';
     case 'MPQOM': 
-      return 'Kvalitets- Och Verksamhetsutveckling, Masterprogram';
+      return 'Kvalitets- och Verksamhetsutveckling, Masterprogram';
     case 'MPSES': 
       return 'Hållbara Energisystem, Masterprogram';
     case 'MPSYS': 
-      return 'Systemteknik, Reglerteknik Och Mekatronik, Masterprogram';
+      return 'Systemteknik, Reglerteknik och Mekatronik, Masterprogram';
     case 'MPBME': 
       return 'Medicinsk Teknik, Masterprogram';
     case 'MPNUE': 
-      return 'Nukleär Vetenskap Och Teknik, Masterprogram';
+      return 'Nukleär Vetenskap och Teknik, Masterprogram';
     case 'MPEES': 
       return 'Inbyggda Elektroniksystem, Masterprogram';
     case 'MPSEB': 
-      return 'Konstruktionsteknik Och Byggnadsteknologi, Masterprogram';
+      return 'Konstruktionsteknik och Byggnadsteknologi, Masterprogram';
     case 'MPIEE': 
-      return 'Infrastruktur Och Miljöteknik, Masterprogram';
+      return 'Infrastruktur och Miljöteknik, Masterprogram';
     case 'MPWPS': 
-      return 'Trådlös Teknik, Fotonik Och Rymdteknik, Masterprogram';
+      return 'Trådlös Teknik, Fotonik och Rymdteknik, Masterprogram';
     case 'MPLOL': 
-      return 'Lärande Och Ledarskap, Masterprogram';
+      return 'Lärande och Ledarskap, Masterprogram';
     case 'MPIDE': 
       return 'Interaktionsdesign, Masterprogram';
     case 'MPENM': 
-      return 'Matematik Och Beräkningsvetenskap, Masterprogram';
+      return 'Matematik och Beräkningsvetenskap, Masterprogram';
     case 'MPDCF': 
-      return 'Organisering Och Ledning I Bygg- Och Fastighetssektorn, Masterprogram';
+      return 'Organisering och Ledning I Bygg- och Fastighetssektorn, Masterprogram';
     case 'MPCAS': 
       return 'Komplexa Adaptiva System, Masterprogram';
     case 'MPARC': 
-      return 'Arkitektur Och Stadsbyggnad, Masterprogram';
+      return 'Arkitektur och Stadsbyggnad, Masterprogram';
     case 'MPAME': 
       return 'Tillämpad Mekanik, Masterprogram';
     case 'MPALG': 
-      return 'Datavetenskap - Algoritmer, Programspråk Och Logik, Masterprogram';
+      return 'Datavetenskap - Algoritmer, Programspråk och Logik, Masterprogram';
     case 'MPMAR': 
-      return 'Sjöfartens Organisation Och Ledning, Masterprogram';
+      return 'Sjöfartens Organisation och Ledning, Masterprogram';
     case 'MPTSE': 
       return 'Industriell Ekologi, Masterprogram';
     case 'MPMCN': 
       return 'Materialkemi, Masterprogram';
     case 'MPSOF': 
-      return 'Software Engineering And Technology - Utveckling Och Implementering Av Mjukvara, Masterprogram';
+      return 'Software Engineering And Technology - Utveckling och Implementering Av Mjukvara, Masterprogram';
     case 'MPPAS': 
-      return 'Fysik Och Astronomi, Masterprogram';
+      return 'Fysik och Astronomi, Masterprogram';
     case 'MPBIO': 
       return 'Bioteknik, Masterprogram';
     case 'MPAEM': 
@@ -172,17 +172,17 @@ export const getProgramme = abbr => {
     case 'MPAUT': 
       return 'Fordonsteknik, Masterprogram';
     case 'MPBDP': 
-      return 'Entreprenörskap Och Affärsdesign, Masterprogram';
+      return 'Entreprenörskap och Affärsdesign, Masterprogram';
     case 'MPCOM': 
       return 'Kommunikationssystem, Masterprogram';
     case 'MPDES': 
       return 'Teknisk Design, Masterprogram';
     case 'MPDSD': 
-      return 'Arkitektur Och Planering För Hållbar Framtid, Masterprogram';
+      return 'Arkitektur och Planering För Hållbar Framtid, Masterprogram';
     case 'MPEPO': 
       return 'Elkraftteknik, Masterprogram';
     case 'MPISC': 
-      return 'Innovativ Och Hållbar Kemiteknik, Masterprogram';
+      return 'Innovativ och Hållbar Kemiteknik, Masterprogram';
     case 'MPNAV': 
       return 'Marin Teknik, Masterprogram';
     case 'MPPEN': 
@@ -190,31 +190,31 @@ export const getProgramme = abbr => {
     case 'MPSCM': 
       return 'Supply Chain Management, Masterprogram';
     case 'MPSOV': 
-      return 'Ljud Och Vibrationer, Masterprogram';
+      return 'Ljud och Vibrationer, Masterprogram';
     case 'TIPMA': 
       return 'Internationell Projektledning, Masterprogram';
     case 'MPCSN': 
-      return 'Datorer, Nätverk Och System, Masterprogram';
+      return 'Datorer, Nätverk och System, Masterprogram';
     case 'MPNAT': 
       return 'Nanoteknologi, Masterprogram';
     case 'TSLOG': 
-      return 'Sjöfart Och Logistik';
+      return 'Sjöfart och Logistik';
     case 'TISJL': 
       return 'Sjöingenjör';
     case 'TSJKL': 
       return 'Sjökapten';
     case 'TAFFS': 
-      return 'Affärsutveckling Och Entreprenörskap Inom Samhällsbyggnadsteknik';
+      return 'Affärsutveckling och Entreprenörskap Inom Samhällsbyggnadsteknik';
     case 'MTS': 
       return 'Människa - Teknik - Samhälle';
     case 'SPRAK': 
-      return 'Fackspråk Och Kommunikation';
+      return 'Fackspråk och Kommunikation';
     case 'KPMUT': 
-      return 'Kompletterande Utbildning För Ingenjörer Och Arkitekter Med Avslutad Utländsk Utbildning Och Utfärdad Utländsk Examen';
+      return 'Kompletterande Utbildning För Ingenjörer och Arkitekter Med Avslutad Utländsk Utbildning och Utfärdad Utländsk Examen';
     case 'ZBASS': 
       return 'Tekniskt Basår';
     case 'KPLOL': 
-      return 'Lärande Och Ledarskap, Kompletterande Pedagogisk Utbildning';
+      return 'Lärande och Ledarskap, Kompletterande Pedagogisk Utbildning';
     case 'SBVII': 
       return 'Sjöbefäl Klass Vii</option></select>';
     default:

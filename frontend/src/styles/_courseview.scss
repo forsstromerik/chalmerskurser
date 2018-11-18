@@ -33,36 +33,8 @@
     }
   }
 
-  .institution {
-    font-size: 1.2rem;
-    font-weight: 700;
-    height: 50px;
-    display: flex;
-    margin-top: 30px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .examinator-and-credits {
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .examinator {
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-    .credits {
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-  }
-
-
   .study-periods {
     margin-top: 30px;
-    font-weight: 700;
 
     .row {
       width: 100%;
@@ -123,8 +95,20 @@
     }
   }
 
+  .information {
+    font-size: 1.1rem;
+
+    div {
+      margin: 10px 0;
+      span:nth-child(1) {
+       width: 15%;
+       display: inline-block;
+     }
+    }
+  }
+
   .more-buttons {
-    height: 180px;
+    margin: 30px 0;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -138,8 +122,16 @@
       font-size: 1.1rem;
       transition-duration: 0.2s;
       outline: none;
-
-      &:hover {
+      &.not-found {
+        background-color: #c7c7c757;
+        border: 2px solid #b99b5e4d;
+        color: #73737391;
+        
+        &:hover {
+          cursor: not-allowed;
+        }
+      }
+      &:hover:not(.not-found) {
         background-color: #f1a200;
         cursor: pointer;
       }
@@ -147,6 +139,7 @@
   }
 
   h2 {
+    margin-top: 50px;
     border-bottom: 1px solid #f1a200;
     padding-bottom: 10px;
   }
@@ -158,6 +151,7 @@
   a {
     text-decoration: none;
   }
+
   .bottom-button-holder {
     display: flex;
     width: 100%;

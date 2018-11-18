@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { getInstitution } from '../helpers/parser';
+import { getInstitution, getProgramme } from '../helpers/parser';
 
 import '../styles/_courseview.scss';
 
@@ -10,12 +10,8 @@ class Course extends Component {
     const { course } = this.props;
     if(course && Object.keys(course).length > 6) {
       return [
-        <div key='0' className='institution'>{`Institution: ${getInstitution(course.institution)}`}</div>,
-        <div key='1' className='examinator-and-credits'>
-          <div className='examinator'>{`Examinator: ${course.examinator}`}</div>
-          <div className='credits'>{`${course.credits} hp`}</div>
-        </div>,
-        <div key='2' className='study-periods'>
+        <h2 key='0'>Läsperiod</h2>,
+        <div key='1' className='study-periods'>
           <div className='row'>
             <div className='first-four'>
               <span className='lp1'>Läsperiod 1</span>
@@ -41,14 +37,31 @@ class Course extends Component {
             </div>
           </div>
         </div>,
+        <h2 key='2'>Information</h2>,
+        <div className='information'>
+          <div className='credits'>
+            <span>Omfattning:</span>
+            <span>{`${course.credits} högskolepoäng`}</span>
+          </div>
+          <div className='institution'>
+            <span>Institution:</span>
+            <span>{`${getInstitution(course.institution)}`}</span>
+          </div>
+          <div className='owner'>
+            <span>Tillhör:</span>
+            <span>{`${course.ownerProgram} - ${getProgramme(course.ownerProgram)}`}</span>
+          </div>
+          <div className='examinator'>
+            <span>Examinator:</span>
+            <span>{`${course.examinator}`}</span>
+          </div>
+        </div>,
         <div key='3' className='more-buttons'> 
-          {course.homepage &&
-          <a href={course.homepage} target='_blank'>
-            <button className='button'>
-              🖥 Kurshemsida
+          <a href={course.homepage ? course.homepage : null} target='_blank'>
+            <button className={course.homepage ? 'button' : 'button not-found'}>
+              {course.homepage ? '🖥 Kurshemsida' : '❌ Kurshemsida ej funnen'}
             </button>
           </a>
-          }
           <a href={course.examinatorURL} target='_blank'>
             <button className='button'>
               💼 Examinatorns sida
@@ -69,7 +82,7 @@ class Course extends Component {
       return null;
     }
   }
-
+  
   render() {
     const { course } = this.props;
     let courseInfo = this.renderCourseInfo();

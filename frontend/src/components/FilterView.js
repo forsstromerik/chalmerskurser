@@ -128,8 +128,7 @@ class FilterView extends Component {
     return (
       <div className='main'>
         <span className='tip'>
-          <p>Kombinera queries med #</p>
-          <p>Ex: TKAUT # LP3 # 7,5</p>
+          <p>Kombinera sökord med ett # (Ex: LP3 # 7,5 # Data)</p>
         </span>
         <div className='filter-view'>
           <Searchbox 
