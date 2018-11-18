@@ -66,6 +66,7 @@ class FilterView extends Component {
   viewCourse = course => {
     const { activeCourse } = this.state;
     if(activeCourse || !course) return;
+    
     this.setState({ activeCourse: course, return: false }, this.fetchMore(course));
     this.scrollTop();
     this.props.history.push(`?course=${course.code}`);
@@ -80,14 +81,28 @@ class FilterView extends Component {
   }
 
   fetchMore = course => {
+    const { code, name } = course;
     axios.get(`${url}/courses/${course._id}?minify=true`).then(res => {
 
     this.setState(prev => ({ 
         activeCourse: {...prev.activeCourse, ...res.data} 
-      }))
+      }), this.log(code, name))
     })
     .catch(err => {
       console.log(err);
+    })
+  }
+
+  log = (code, name) => {
+    const { searchString } = this.state;
+    console.log(code, name, searchString);
+    let courseStat = {
+      code,
+      name,
+      query: searchString
+    }
+    axios.post(`${url}/courses/coursestat`, { courseStat }).then(res => {
+      console.log(res);
     })
   }
 

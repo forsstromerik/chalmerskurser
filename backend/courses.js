@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Course = require('./course');
+const CourseStat = require('./courseStat');
 
 /* Post new course to db */
 router.post('/course', (req, res) => {
@@ -173,6 +174,40 @@ router.delete('/:courseID', (req, res) => {
     .catch(err => {
       console.log(err);
       res.status(500).json({ error: err });
+    })
+})
+
+/* ---------------------------------------------------------------- */
+
+router.post('/courseStat', (req, res) => {
+  let stat = req.body.courseStat;
+  const courseStat = new CourseStat({
+    _id: new mongoose.Types.ObjectId(),
+    code: stat.code,
+    name: stat.name,
+    popularity: 1,
+    queries: [stat.query]
+  })
+  courseStat
+    .save()
+    .then(_res => {
+      res.status(201).json({
+        message: 'Handling POST request to /courses/courseStat',
+        createdCourseStat: courseStat
+      });
+    })
+    .catch(e => {
+      CourseStat.findOneAndUpdate({ code: courseStat.code }, { $inc: { popularity: 1 } }).then(r => {
+        if(stat.query) {
+          CourseStat.findOneAndUpdate({ code: courseStat.code }, { $push: { queries: stat.query } }).then(re => {
+            res.status(200).json(re)
+          }).catch(_ => res.status(500).json({ error: _ }))
+        } else {
+          res.status(200).json(r)
+        }
+      }).catch(err => {
+        res.status(500).json({ error: err });
+      })
     })
 })
 
