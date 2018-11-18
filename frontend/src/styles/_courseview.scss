@@ -334,3 +334,45 @@
     }
   }
 }
+
+@media screen and (max-width: 370px) {
+  .course-info {
+    .study-periods {
+      font-size: 0.4rem;
+      margin-top: 10px;
+    }
+
+    .information {
+      font-size: 0.65rem;
+  
+      div {
+        margin: 3px 0;
+
+        span:nth-child(1) {
+         width: 30%;
+         max-width: 70px;
+       }
+      }
+    }
+
+    .more-buttons {
+      .button {
+        width: 9rem;
+        height: 3rem;
+        font-size: 0.7rem;
+      }
+    }
+
+    .bottom-button-holder {
+      .bottom-button {
+        width: 9rem;
+        height: 3rem;
+        font-size: 0.7rem;
+      }
+    }
+
+    .footer {
+      height: 10px;
+    }
+  }
+}

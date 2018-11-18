@@ -28,7 +28,7 @@ input:disabled {
 
 @media screen and (max-width: 888px) {
   .searchbox {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   
   .input-label {
@@ -43,7 +43,7 @@ input:disabled {
 
 @media screen and (max-width: 530px) {
   .searchbox {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .input-label {
@@ -52,6 +52,21 @@ input:disabled {
 
     &.focused {
       transform: translateY(-0.65rem);
+    }
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .searchbox {
+    font-size: 0.7rem;
+  }
+
+  .input-label {
+    font-size: 0.6rem;
+    transform: translateY(0.7rem);
+
+    &.focused {
+      transform: translateY(-0.6rem);
     }
   }
 }
