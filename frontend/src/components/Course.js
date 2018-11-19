@@ -82,17 +82,30 @@ class Course extends Component {
       return null;
     }
   }
+
+  setMetadata = c => {
+    if(!c) return null;
+    return [
+      <meta property="og:url"         content={`https://chalmerskurser.se/?course=${c.code}`} />,
+      <meta property="og:title"       content={`${c.code} - ${c.name}`} />,
+      <meta property="og:description" content={`Kursinformation om ${c.name} på chalmerskurser.se`} />
+    ];
+  }
   
   render() {
     const { course } = this.props;
     let courseInfo = this.renderCourseInfo();
-    return (
+    let metadata = this.setMetadata(course);
+    return [
+      <div style={{ display: 'none' }}>
+        {metadata}
+      </div>,
       <div className={`course-info${course ? ' active' : ''}`}>
         <button onClick={this.props.goBack} className='back-button'>{`⬅ Tillbaka`}</button>
         {courseInfo}
         <div className='footer' />
       </div>
-    );
+    ];
   }
 }
 
