@@ -1,8 +1,9 @@
 .courselist {
-  position: relative;
+  position: absolute;
   transition-duration: 0.5s;
   transform: translateX(-800px);
-  width: 100%;
+  width: 50%;
+  min-width: 800px;
   
   &:not(.active) {
     opacity: 0;
@@ -75,9 +76,11 @@
 
 @media screen and (max-width: 888px) {
   .courselist {
+    width: 70%;
+    min-width: 500px; 
     .course {
       font-size: 0.9rem;
-
+      
       .second-row {
         font-size: 0.7rem;
       }
@@ -87,6 +90,8 @@
 
 @media screen and (max-width: 530px) {
   .courselist {
+      max-width: 90%; 
+      min-width: 90%; 
     .search-tip {
       font-size: 0.6rem;
       

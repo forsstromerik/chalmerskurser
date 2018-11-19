@@ -20,10 +20,18 @@
   &.focused {
     transform: translateY(-1.5rem);
   }
+
+  &.disabled {
+    color: #eee;
+    pointer-events: none;
+    user-select: none;
+  }
 }
 
 input:disabled {
   color: black;
+  border-color: #eee;
+  font-weight: 700;
 }
 
 @media screen and (max-width: 888px) {

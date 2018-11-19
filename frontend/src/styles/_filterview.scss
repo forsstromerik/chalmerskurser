@@ -10,17 +10,31 @@
     color: #666;
     display: block;
     margin-bottom: 70px;
+
+    &.disabled {
+      color: #eee;
+      pointer-events: none;
+      user-select: none;
+    }
   } 
 }
 
 @media screen and (max-width: 888px) {
   .filter-view {
-    min-width: 90%;
+    width: 70%;
+    min-width: 500px; 
     padding-top: 20px;
 
     .tip {
       right: auto;
       text-align: center;
     }
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .filter-view {
+    max-width: 90%;
+    min-width: 90%;
   }
 }

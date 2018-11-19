@@ -75,7 +75,7 @@ class Searchbox extends Component {
       <label 
         key='0'
         ref={ref => this.label = ref}
-        className={`input-label${focused ? ' focused' : ''}`}
+        className={`input-label${focused ? ' focused' : ''}${course ? ' disabled' : ''}`}
         htmlFor='input'>
           Namn, Kod, Examinator, HP, Program, Läsperiod, Institution
       </label>,

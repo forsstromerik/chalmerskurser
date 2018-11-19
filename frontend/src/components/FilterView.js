@@ -140,7 +140,7 @@ class FilterView extends Component {
     return (
       <div className='main'>
         <div className='filter-view'>
-          <span className='tip'>
+          <span className={`tip${activeCourse ? ' disabled' : ''}`}>
             Kombinera sökord med ett # (Ex: LP3 # 7,5 # Data)
           </span>
           <Searchbox 
