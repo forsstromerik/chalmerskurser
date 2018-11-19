@@ -4,32 +4,4 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
-  
-  .tip {
-    padding: 10px;
-    border-radius: 4px;
-    margin-top: 10px;
-    position: absolute;
-    text-align: center;
-    font-size: 0.7rem;
-    color: #666;
-    right: calc(50vw - 400px);
-
-    p {
-      margin: 5px 0;
-    }
-  } 
-}
-
-@media screen and (max-width: 888px) {
-  .main .tip {
-    right: auto;
-    text-align: center;
-  }
-}
-
-@media screen and (max-width: 530px) {
-  .main .tip {
-    font-size: 0.5rem;
-  }
 }

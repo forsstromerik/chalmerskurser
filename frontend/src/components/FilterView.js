@@ -22,7 +22,7 @@ class FilterView extends Component {
     return: false,
     showAll: false,
     searchTip: false,
-    limit: 30
+    limit: 5
   }
 
   componentDidMount() {
@@ -139,10 +139,10 @@ class FilterView extends Component {
     let redirect = this.redirect();
     return (
       <div className='main'>
-        <span className='tip'>
-          <p>Kombinera sökord med ett # (Ex: LP3 # 7,5 # Data)</p>
-        </span>
         <div className='filter-view'>
+          <span className='tip'>
+            Kombinera sökord med ett # (Ex: LP3 # 7,5 # Data)
+          </span>
           <Searchbox 
             course={activeCourse}
             onChange={this.onChange}

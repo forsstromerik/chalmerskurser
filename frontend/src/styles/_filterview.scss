@@ -1,19 +1,26 @@
 .filter-view {
-  padding-top: 140px;
+  padding-top: 30px;
   width: 50%;
   min-width: 800px;
   overflow: hidden;
+
+  .tip {
+    text-align: right;
+    font-size: 0.7rem;
+    color: #666;
+    display: block;
+    margin-bottom: 70px;
+  } 
 }
 
 @media screen and (max-width: 888px) {
   .filter-view {
     min-width: 90%;
-    padding-top: 100px;
-  }
-}
+    padding-top: 20px;
 
-@media screen and (max-width: 530px) {
-  .filter-view {
-    padding-top: 80px;
+    .tip {
+      right: auto;
+      text-align: center;
+    }
   }
 }
