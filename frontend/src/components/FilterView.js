@@ -152,7 +152,7 @@ class FilterView extends Component {
         {metadata}
         <div className='filter-view'>
           <span className={`tip${activeCourse ? ' disabled' : ''}`}>
-            Kombinera sökord med ett # (Ex: LP3 # 7,5 # Data)
+            Använd # för att kombinera sökparametrar, ex: LP3 # 7,5 # Data
           </span>
           <Searchbox 
             course={activeCourse}

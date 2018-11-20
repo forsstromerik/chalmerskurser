@@ -1,20 +1,17 @@
 .course-info {
+  transform: translateX(0);
   width: 50%;
+  min-width: 800px;
   position: absolute;
-  transform: translateX(800px);
   margin-top: 30px;
   transition: transform 0.5s, opacity 0.5s;
-  opacity: 0;
-  min-width: 800px;
+  opacity: 1;
   
   &:not(.active) {
+    transform: translateX(50%);
     width: 0;
-  }
-
-  &.active {
-    min-width: 800px;
-    transform: translateX(0);
-    opacity: 1;
+    min-width: 0;
+    opacity: 0;
   }
 
   .back-button {
@@ -192,10 +189,11 @@
 
 @media screen and (max-width: 888px) {
   .course-info {
-    transform: translateX(90%); 
+    width: 70%;
+    min-width: 500px;
 
-    &.active {
-      min-width: 90%;
+    &:not(.active) {
+      transform: translateX(70%);
     }
 
     .back-button {
@@ -248,26 +246,15 @@
   }
 }
 
-@media screen and (max-width: 888px) {
-  .course-info {
-    width: 70% !important;
-    min-width: 500px !important;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .course-info {
-    .study-periods {
-      font-size: 0.7rem;
-    }
-  }
-}
-
 @media screen and (max-width: 530px) {
   .course-info {
-    max-width: 90% !important;
-    min-width: 90% !important;
+    max-width: 90%;
+    min-width: 90%;
 
+    &:not(.active) {
+      transform: translateX(90%);
+    }
+    
     .back-button {
       width: 6.5rem;
       height: 1.7rem;

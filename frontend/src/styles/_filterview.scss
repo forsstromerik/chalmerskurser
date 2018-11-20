@@ -36,5 +36,16 @@
   .filter-view {
     max-width: 90%;
     min-width: 90%;
+    .tip {
+      font-size: 0.6rem;
+    }
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .filter-view {
+    .tip {
+      font-size: 0.5rem;
+    }
   }
 }
