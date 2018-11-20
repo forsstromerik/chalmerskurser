@@ -93,15 +93,26 @@ parseWithRegex = (arr, course) => {
       addToSyllabus = true;
     }
     if(addToSyllabus){
-      let stop = RegExp(/\W*<\/div>/).exec(arr[i]);
+      let stop = RegExp(/\s*<\/table/).exec(arr[i + 10]);
       if(stop) {
-        let match1 = RegExp(/\W*<\/div>/).exec(arr[i + 1]);
-        let match2 = RegExp(/\W*<\/td>/).exec(arr[i + 1]);
-        let j = 1;
-        while(!(match1 || match2)) {
-          HTMLstring += arr[i + j++].toString();
-          match1 = RegExp(/\W*<\/div>/).exec(arr[i + j]);
-          match2 = RegExp(/\W*<\/td>/).exec(arr[i + j]);
+        let j = i + 10;
+        let k = j
+        for (k; k >= i; k--) {
+          let match = (
+            arr[k].match(/\s*<\/table/) ||
+            arr[k].match(/\s*<\/tr/)    ||
+            arr[k].match(/\s*<\/td/)    ||
+            arr[k].match(/\s*<\/div/)   ||
+            arr[k].match(/\s*<\/tbody/) 
+            );
+          if (!match) {
+            j = k;
+            break;
+          }
+        }
+        j = Math.min(j, k);
+        for (let n = i; n <= j; n++) {
+          HTMLstring += arr[n].toString();
         }
         addToSyllabus = false;
         updatedCourse.syllabus = HTMLstring;
