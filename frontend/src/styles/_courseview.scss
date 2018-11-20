@@ -8,7 +8,7 @@
   opacity: 1;
   
   &:not(.active) {
-    transform: translateX(50%);
+    transform: translateX(800px);
     width: 0;
     min-width: 0;
     opacity: 0;
@@ -193,7 +193,7 @@
     min-width: 500px;
 
     &:not(.active) {
-      transform: translateX(70%);
+      transform: translateX(500px);
     }
 
     .back-button {
