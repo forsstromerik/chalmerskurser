@@ -39,8 +39,7 @@ class FilterView extends Component {
   checkURL = () => {
     let query = this.props.history.location.search;
     if (this.props.history.location.search) {
-      query = query.split('=');
-      query = query[query.length - 1];
+      query = query.match(/course=([\S]{6})/)[1];
       const { courses } = this.state;
       this.viewCourse(courses.filter(c => c.code === query)[0]);
     }
