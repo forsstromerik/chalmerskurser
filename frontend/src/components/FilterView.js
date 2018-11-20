@@ -127,15 +127,6 @@ class FilterView extends Component {
     this.setState({ searchTip: (toggle && filteredCourses.length > this.state.limit) });
   }
 
-  setMetadata = set => {
-    if (!set) return null;
-    return [
-      <meta property="og:url"         content="https://chalmerskurser.se" />,
-      <meta property="og:title"       content="Chalmerskurser" />,
-      <meta property="og:description" content="Kursinformation enkelt och snabbt på chalmerskurser.se" />
-    ];
-  }
-
   render() {
     const { 
       filteredCourses, 
@@ -146,10 +137,8 @@ class FilterView extends Component {
       limit 
     } = this.state;
     let redirect = this.redirect();
-    let metadata = this.setMetadata(!activeCourse);
     return (
       <div className='main'>
-        {metadata}
         <div className='filter-view'>
           <span className={`tip${activeCourse ? ' disabled' : ''}`}>
             Använd # för att kombinera sökparametrar, ex: LP3 # 7,5 # Data
