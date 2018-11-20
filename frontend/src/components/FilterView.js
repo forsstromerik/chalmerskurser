@@ -22,7 +22,7 @@ class FilterView extends Component {
     return: false,
     showAll: false,
     searchTip: false,
-    limit: 5
+    limit: 30
   }
 
   componentDidMount() {
