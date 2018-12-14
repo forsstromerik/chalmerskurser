@@ -57,23 +57,23 @@ class Course extends Component {
           </div>
         </div>,
         <div key='3' className='more-buttons'> 
-          <a href={course.homepage ? course.homepage : null} target='_blank'>
+          <a href={course.homepage ? course.homepage : null} target='_blank' rel='noopener noreferrer'>
             <button className={course.homepage ? 'button' : 'button not-found'}>
               {course.homepage ? '🖥 Kurshemsida' : '❌ Kurshemsida ej funnen'}
             </button>
           </a>
-          <a href={course.examinatorURL} target='_blank'>
+          <a href={course.examinatorURL} target='_blank' rel='noopener noreferrer'>
             <button className='button'>
-              💼 Examinatorns sida
+              <span role='img' aria-label='briefcase'>💼</span> Examinatorns sida
             </button>
           </a>
         </div>,
         <h2 key='4'>Kursplan</h2>,
         <div key='5' className='set-inner' dangerouslySetInnerHTML={{__html: course.syllabus}} />,
         <div key='6' className='bottom-button-holder'>
-          <a href={course.url} target='_blank'>
+          <a href={course.url} target='_blank' rel='noopener noreferrer'>
             <button className='bottom-button'>
-              🖥 Gå till orginalsidan
+              <span role='img' aria-label='computer'>🖥</span> Gå till orginalsidan
             </button>
           </a>
         </div>
