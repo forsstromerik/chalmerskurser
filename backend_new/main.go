@@ -5,24 +5,35 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/julienschmidt/httprouter"
 )
 
 var port = "8080"
 
 func main() {
-	/* POST or GET multiple courses */
-	http.HandleFunc("/courses", courses.Courses)
+	router := httprouter.New()
 
-	/* POST one course to db */
-	http.HandleFunc("/courses/course", courses.Course)
+	/* GET */
+	/* All courses or single course by ID */
+	router.GET("/courses", courses.GetCourses)
+	router.GET("/courses/course/:courseID", courses.GetOnCourseID)
 
-	/* GET, PATCH or DELETE one course specified by ID */
-	http.HandleFunc("/courses/course/:courseID", courses.CourseID)
+	/* POST */
+	/* Multiple courses, single course, or stats for single course */
+	router.POST("/courses", courses.PostCourses)
+	router.POST("/courses/course", courses.PostCourse)
+	router.POST("/courseStat", courses.PostCourseStat)
 
-	/* POST course statistics */
-	http.HandleFunc("/courseStat", courses.CourseStat)
+	/* PATCH */
+	/* Update fields for course by ID */
+	router.PATCH("/courses/course/:courseID", courses.PatchOnCourseID)
+
+	/* DELETE */
+	/* Delete course by ID */
+	router.DELETE("/courses/course/:courseID", courses.DeleteOnCourseID)
 
 	/* Server start listening */
 	fmt.Println("Starting server. Listening on port", port)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
