@@ -102,3 +102,11 @@ func PatchByCode(code string, req *http.Request) (Course, error) {
 	err = config.Courses.Update(bson.M{"code": code}, &course)
 	return course, err
 }
+
+func DeleteByID(id string, req *http.Request) error {
+	return config.Courses.RemoveId(bson.ObjectIdHex(id))
+}
+
+func DeleteByCode(code string, req *http.Request) error {
+	return config.Courses.Remove(bson.M{"code": code})
+}

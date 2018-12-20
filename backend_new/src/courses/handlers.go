@@ -89,6 +89,30 @@ func patchCourseByID(id string, w http.ResponseWriter, req *http.Request) {
 	sendResponse(&w, crs)
 }
 
+func deleteCourseByCode(code string, w http.ResponseWriter, req *http.Request) {
+	err := DeleteByCode(code, req)
+
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError)+": "+err.Error(),
+			http.StatusInternalServerError)
+		return
+	}
+
+	fmt.Fprint(w, http.StatusNoContent)
+}
+
+func deleteCourseByID(id string, w http.ResponseWriter, req *http.Request) {
+	err := DeleteByID(id, req)
+
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError)+": "+err.Error(),
+			http.StatusInternalServerError)
+		return
+	}
+
+	fmt.Fprint(w, http.StatusNoContent)
+}
+
 func GetCourses(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	courses, err := AllCourses()
 	if err != nil {
@@ -154,7 +178,15 @@ func PatchOnCourseID(w http.ResponseWriter, req *http.Request, ps httprouter.Par
 }
 
 func DeleteOnCourseID(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-	fmt.Fprintln(w, "DELETE from /courses/:courseID")
+	id := ps[0].Value
+	switch len(id) {
+	case 6:
+		deleteCourseByCode(id, w, req)
+	case 24:
+		deleteCourseByID(id, w, req)
+	default:
+		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+	}
 }
 
 func PostCourseStat(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
