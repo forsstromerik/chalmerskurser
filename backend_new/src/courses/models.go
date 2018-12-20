@@ -2,6 +2,8 @@ package courses
 
 import (
 	"config"
+	"encoding/json"
+	"net/http"
 
 	"github.com/globalsign/mgo/bson"
 )
@@ -45,5 +47,58 @@ func CourseByCode(code string) (Course, error) {
 	course := Course{}
 	err := config.Courses.Find(bson.M{"code": code}).One(&course)
 
+	return course, err
+}
+
+func NewCourse(req *http.Request) (Course, error) {
+	course := Course{}
+	err := json.NewDecoder(req.Body).Decode(&course)
+	course.ID = bson.NewObjectId()
+
+	if err != nil {
+		return course, err
+	}
+
+	err = config.Courses.Insert(course)
+	return course, err
+}
+
+func PatchByID(id string, req *http.Request) (Course, error) {
+	course := Course{}
+	oldCourse := Course{}
+
+	err := json.NewDecoder(req.Body).Decode(&course)
+	if err != nil {
+		return course, err
+	}
+
+	oldCourse, err = CourseByID(id)
+	if err != nil {
+		return course, err
+	}
+
+	course.ID = oldCourse.ID
+
+	err = config.Courses.UpdateId(bson.ObjectIdHex(id), &course)
+	return course, err
+}
+
+func PatchByCode(code string, req *http.Request) (Course, error) {
+	course := Course{}
+	oldCourse := Course{}
+
+	err := json.NewDecoder(req.Body).Decode(&course)
+	if err != nil {
+		return course, err
+	}
+
+	oldCourse, err = CourseByCode(code)
+	if err != nil {
+		return course, err
+	}
+
+	course.ID = oldCourse.ID
+
+	err = config.Courses.Update(bson.M{"code": code}, &course)
 	return course, err
 }

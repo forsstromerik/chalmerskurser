@@ -51,6 +51,44 @@ func getCourseByID(w http.ResponseWriter, id string) {
 	sendResponse(&w, crs)
 }
 
+func patchCourseByCode(code string, w http.ResponseWriter, req *http.Request) {
+	course, err := PatchByCode(code, req)
+
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError)+": "+err.Error(),
+			http.StatusInternalServerError)
+		return
+	}
+
+	crs, err := json.Marshal(course)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError)+": "+err.Error(),
+			http.StatusInternalServerError)
+		return
+	}
+
+	sendResponse(&w, crs)
+}
+
+func patchCourseByID(id string, w http.ResponseWriter, req *http.Request) {
+	course, err := PatchByID(id, req)
+
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError)+": "+err.Error(),
+			http.StatusInternalServerError)
+		return
+	}
+
+	crs, err := json.Marshal(course)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError)+": "+err.Error(),
+			http.StatusInternalServerError)
+		return
+	}
+
+	sendResponse(&w, crs)
+}
+
 func GetCourses(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	courses, err := AllCourses()
 	if err != nil {
@@ -74,7 +112,21 @@ func PostCourses(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 }
 
 func PostCourse(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	fmt.Fprintln(w, "POST from /courses/course")
+	course, err := NewCourse(req)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError)+": "+err.Error(),
+			http.StatusInternalServerError)
+		return
+	}
+
+	crs, err := json.Marshal(course)
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError)+": "+err.Error(),
+			http.StatusInternalServerError)
+		return
+	}
+
+	sendResponse(&w, crs)
 }
 
 func GetOnCourseID(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
@@ -90,7 +142,15 @@ func GetOnCourseID(w http.ResponseWriter, req *http.Request, ps httprouter.Param
 }
 
 func PatchOnCourseID(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-	fmt.Fprintln(w, "PATCH from /courses/:courseID")
+	id := ps[0].Value
+	switch len(id) {
+	case 6:
+		patchCourseByCode(id, w, req)
+	case 24:
+		patchCourseByID(id, w, req)
+	default:
+		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+	}
 }
 
 func DeleteOnCourseID(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {

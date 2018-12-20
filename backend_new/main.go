@@ -21,7 +21,7 @@ func main() {
 
 	/* POST */
 	/* Multiple courses, single course, or stats for single course */
-	router.POST("/courses", courses.PostCourses)
+	// router.POST("/courses", courses.PostCourses)
 	router.POST("/courses/course", courses.PostCourse)
 	router.POST("/courseStat", courses.PostCourseStat)
 

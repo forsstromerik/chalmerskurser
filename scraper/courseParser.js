@@ -134,7 +134,7 @@ parseWithRegex = (arr, course) => {
 }
 
 save = (course, last) => {
-  axios.post(`${process.env.API_BASE_URL}course`, { course }).then(res => {
+  axios.post(`${process.env.API_BASE_URL}course`, { ...course }).then(res => {
     console.log(`Saved ${course.code} - ${course.name} to database successfully!`);
   }).catch(async err => {
     console.log(`Error: could not save ${course.code} - ${course.name} to database`);
@@ -185,7 +185,7 @@ validate = course => {
 
 patchCourse = async course => {
   return new Promise((resolve, reject) => {
-    axios.patch(`${process.env.API_BASE_URL}${course.code}`, { course })
+    axios.patch(`${process.env.API_BASE_URL}${course.code}`, { ...course })
     .then(res => {
       resolve(res);
     })
