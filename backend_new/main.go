@@ -20,8 +20,7 @@ func main() {
 	router.GET("/courses/:courseID", courses.GetOnCourseID)
 
 	/* POST */
-	/* Multiple courses, single course, or stats for single course */
-	// router.POST("/courses", courses.PostCourses)
+	/* Course or course statistics */
 	router.POST("/courses/course", courses.PostCourse)
 	router.POST("/courseStat", courses.PostCourseStat)
 

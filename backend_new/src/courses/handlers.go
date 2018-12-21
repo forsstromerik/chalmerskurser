@@ -131,10 +131,6 @@ func GetCourses(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	sendResponse(&w, crss)
 }
 
-func PostCourses(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	fmt.Fprintln(w, "POST from /courses")
-}
-
 func PostCourse(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	course, err := NewCourse(req)
 	if err != nil {
@@ -190,5 +186,5 @@ func DeleteOnCourseID(w http.ResponseWriter, req *http.Request, ps httprouter.Pa
 }
 
 func PostCourseStat(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	fmt.Fprintln(w, "POST from from /courseStat")
+
 }
