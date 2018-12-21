@@ -13,7 +13,7 @@ var port = "8080"
 
 func main() {
 	router := httprouter.New()
-
+	router.OPTIONS("/courses/coursestat", handleOptions)
 	/* GET */
 	/* All courses or single course by ID */
 	router.GET("/courses", courses.GetCourses)
@@ -22,7 +22,7 @@ func main() {
 	/* POST */
 	/* Course or course statistics */
 	router.POST("/courses/course", courses.PostCourse)
-	router.POST("/courseStat", courses.PostCourseStat)
+	router.POST("/courses/coursestat", courses.PostCourseStat)
 
 	/* PATCH */
 	/* Update fields for course by ID */
@@ -35,4 +35,11 @@ func main() {
 	/* Server start listening */
 	fmt.Println("Starting server. Listening on port", port)
 	log.Fatal(http.ListenAndServe(":"+port, router))
+}
+
+func handleOptions(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.Header().Set("Allow", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 }

@@ -9,6 +9,7 @@ import (
 )
 
 func sendResponse(w *http.ResponseWriter, res []byte) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 	(*w).Header().Set("Content-Type", "application/json; charset=utf-8")
 	fmt.Fprint(*w, string(res))
 }
@@ -98,6 +99,7 @@ func deleteCourseByCode(code string, w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprint(w, http.StatusNoContent)
 }
 
@@ -110,6 +112,7 @@ func deleteCourseByID(id string, w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	fmt.Fprint(w, http.StatusNoContent)
 }
 
@@ -186,5 +189,20 @@ func DeleteOnCourseID(w http.ResponseWriter, req *http.Request, ps httprouter.Pa
 }
 
 func PostCourseStat(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
+	status := http.StatusOK
+	new, err := NewCourseStat(req)
+
+	if err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError)+": "+err.Error(),
+			http.StatusInternalServerError)
+		return
+	}
+
+	if new {
+		status = http.StatusCreated
+	}
+
+	fmt.Fprint(w, status)
 }
