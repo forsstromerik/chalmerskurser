@@ -97,9 +97,9 @@ class FilterView extends Component {
     let courseStat = {
       code,
       name,
-      query: searchString
+      queries: [searchString]
     }
-    axios.post(`${url}/courses/coursestat`, { courseStat });
+    axios.post(`${url}/courses/coursestat`, { ...courseStat });
   }
 
   componentDidUpdate (prevProps, prevState) {

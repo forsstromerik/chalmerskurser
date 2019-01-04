@@ -5,11 +5,23 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-var port = "8080"
+var port string
+var portTLS string
+
+func init() {
+	if os.Getenv("DEVPROD") == "prod" {
+		port = "80"
+		portTLS = "443"
+	} else {
+		port = "8080"
+		portTLS = "8081"
+	}
+}
 
 func main() {
 	router := httprouter.New()
@@ -32,9 +44,19 @@ func main() {
 	/* Delete course by ID */
 	router.DELETE("/courses/:courseID", courses.DeleteOnCourseID)
 
+	/* Use HTTPS on prod */
+	if os.Getenv("DEVPROD") == "prod" {
+		go func() {
+			fmt.Println("Listening on port", portTLS)
+			log.Fatal(http.ListenAndServeTLS(":"+portTLS, "/etc/letsencrypt/live/chalmerskurser.se/cert.pem", "/etc/letsencrypt/live/chalmerskurser.se/privkey.pem", router))
+		}()
+	}
+
 	/* Server start listening */
-	fmt.Println("Starting server. Listening on port", port)
+	fmt.Println("Starting server.")
+	fmt.Println("Listening on port", port)
 	log.Fatal(http.ListenAndServe(":"+port, router))
+
 }
 
 func handleOptions(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
