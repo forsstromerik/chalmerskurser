@@ -12,7 +12,7 @@ var Courses *mgo.Collection
 var CourseStats *mgo.Collection
 
 func init() {
-	s, err := mgo.Dial("mongodb://localhost:27017/chalmerscourses")
+	s, err := mgo.Dial("mongodb://mongo/chalmerscourses")
 	if err != nil {
 		panic(err)
 	}

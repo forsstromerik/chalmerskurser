@@ -18,8 +18,8 @@ func init() {
 		port = "80"
 		portTLS = "443"
 	} else {
-		port = "8080"
-		portTLS = "8081"
+		port = "3000"
+		portTLS = "3001"
 	}
 }
 
