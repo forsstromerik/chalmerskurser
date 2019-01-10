@@ -10,13 +10,17 @@ services:
       - '27017:27017'
   backend:
     container_name: docker-backend
-    image: node:10
+    image: golang:1
     restart: always
+    working_dir: /go/src
+    build: './backend_new'
     volumes:
-      - './backend:/usr/src/backend'
-      - './backend/startup.sh:/tmp/startup.sh'
+      - './backend_new/src:/go/src'
+      - './backend_new/startup.sh:/tmp/startup.sh'
       - '/etc/letsencrypt:/etc/letsencrypt'
-    command: /bin/sh /tmp/startup.sh
+    command: bash -c "go run main.go"
+    environment:
+      - DEVPROD=prod
     ports:
       - '3000:80'
       - '3001:443'
