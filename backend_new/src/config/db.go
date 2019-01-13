@@ -1,7 +1,10 @@
 package config
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/globalsign/mgo"
 )
@@ -11,8 +14,31 @@ var DB *mgo.Database
 var Courses *mgo.Collection
 var CourseStats *mgo.Collection
 
+var mongURI string
+var user string
+var pass string
+
 func init() {
-	s, err := mgo.Dial("mongodb://mongo/chalmerscourses")
+	if os.Getenv("DEVPROD") == "prod" {
+		mongURI = "mongo"
+
+		f, _ := os.Open(".credentials")
+		sc := bufio.NewScanner(f)
+		_ = sc.Scan()
+		user = strings.Split(sc.Text(), "=")[1]
+		_ = sc.Scan()
+		pass = strings.Split(sc.Text(), "=")[1]
+
+		if user == "" || pass == "" {
+			panic("Error: credentials for db connection not found")
+		} else {
+			user = user + ":"
+			pass = pass + "@"
+		}
+	} else {
+		mongURI = "localhost:27017"
+	}
+	s, err := mgo.Dial("mongodb://" + user + pass + mongURI + "/chalmerscourses")
 	if err != nil {
 		panic(err)
 	}

@@ -2,6 +2,7 @@ version: '3'
 services: 
   mongo: 
     container_name: docker-mongo
+    command: [--auth]
     image: mongo:4
     restart: always
     volumes:
@@ -18,7 +19,7 @@ services:
       - './backend_new/src:/go/src'
       - './backend_new/startup.sh:/tmp/startup.sh'
       - '/etc/letsencrypt:/etc/letsencrypt'
-    command: bash -c "go run main.go"
+    command: bash -c "go build main.go && ./main"
     environment:
       - DEVPROD=prod
     ports:
