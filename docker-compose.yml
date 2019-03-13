@@ -6,18 +6,20 @@ services:
     image: mongo:4
     restart: always
     volumes:
-      - '/data/db:/data/db'
+      - '../data/db:/data/db'
     ports:
       - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${USER}"
+      MONGO_INITDB_ROOT_PASSWORD: "${PASS}"
   backend:
     container_name: docker-backend
     image: golang:1
     restart: always
     working_dir: /go/src
-    build: './backend_new'
+    build: './backend'
     volumes:
-      - './backend_new/src:/go/src'
-      - './backend_new/startup.sh:/tmp/startup.sh'
+      - './backend/src:/go/src'
       - '/etc/letsencrypt:/etc/letsencrypt'
     command: bash -c "go build main.go && ./main"
     environment:
