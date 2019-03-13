@@ -10,18 +10,17 @@ services:
     ports:
       - '27017:27017'
     environment:
-      MONGO_INITDB_ROOT_USERNAME: "${USER}"
-      MONGO_INITDB_ROOT_PASSWORD: "${PASS}"
+      MONGO_INITDB_ROOT_USERNAME: "${M_USER}"
+      MONGO_INITDB_ROOT_PASSWORD: "${M_PASS}"
   backend:
     container_name: docker-backend
     image: golang:1
     restart: always
     working_dir: /go/src
-    build: './backend'
     volumes:
       - './backend/src:/go/src'
       - '/etc/letsencrypt:/etc/letsencrypt'
-    command: bash -c "go build main.go && ./main"
+    command: bash -c "go get github.com/julienschmidt/httprouter && go get github.com/globalsign/mgo && go get github.com/globalsign/mgo/bson && go build main.go && ./main"
     environment:
       - DEVPROD=prod
     ports:
